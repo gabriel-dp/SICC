@@ -40,7 +40,7 @@ public class DataProviderFile<T extends Entity> extends DataProvider<T> {
 
     public void saveData() {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            outputStream.writeObject(data.values());
+            outputStream.writeObject(new ArrayList<T>(data.values()));
         } catch (IOException e) {
             e.printStackTrace();
         }
