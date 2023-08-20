@@ -1,10 +1,14 @@
 import control.*;
 import model.*;
 // import persistence.*;
+import persistence.DataManager;
 
 public class Program {
 
     public static void main(String[] args) {
+
+        DataManager<User> userManager = new DataManager<>(User.class);
+        userManager.create(new UserAdmin("teste1", "teste", "TESTE", "TESTADOR"));
 
         UserAuthenticator auth = new UserAuthenticator();
 
