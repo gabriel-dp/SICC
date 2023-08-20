@@ -13,6 +13,14 @@ public class Curriculum {
         subjects = new ArrayList<>();
     }
 
+    public int getTotalHours() {
+        int total = 0;
+        for (Subject subject : subjects) {
+            total += subject.getHours();
+        }
+        return total;
+    }
+
     public Date getLastEdit() {
         return lastEdit;
     }
