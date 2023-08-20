@@ -8,11 +8,12 @@ import model.Entity;
 @SuppressWarnings("unchecked")
 public class DataProviderFile<T extends Entity> extends DataProvider<T> {
 
-    private String filePath;
+    private final String directory = "data/";
     private final String extension = ".ser";
+    private String filePath;
 
     public DataProviderFile(Class<T> entityClass) {
-        filePath = "data/" + entityClass.getSimpleName() + extension;
+        filePath = directory + entityClass.getSimpleName() + extension;
         fetchData();
     }
 
