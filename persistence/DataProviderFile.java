@@ -1,6 +1,7 @@
 package persistence;
 
 import java.io.*;
+import java.nio.file.*;
 import java.util.ArrayList;
 
 import model.Entity;
@@ -40,8 +41,16 @@ public class DataProviderFile<T extends Entity> extends DataProvider<T> {
     }
 
     public void saveData() {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
+        try {
+            Path directoryPath = Paths.get(filePath).getParent();
+            if (directoryPath != null && !Files.exists(directoryPath)) {
+                Files.createDirectories(directoryPath);
+            }
+
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath));
             outputStream.writeObject(new ArrayList<T>(data.values()));
+
+            outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
