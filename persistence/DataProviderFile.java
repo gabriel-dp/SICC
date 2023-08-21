@@ -9,12 +9,12 @@ import model.Entity;
 @SuppressWarnings("unchecked")
 public class DataProviderFile<T extends Entity> extends DataProvider<T> {
 
-    private final String directory = "data/";
+    private final String directory = System.getProperty("user.dir");
     private final String extension = ".ser";
     private String filePath;
 
     public DataProviderFile(Class<T> entityClass) {
-        filePath = directory + entityClass.getSimpleName() + extension;
+        filePath = directory + File.separator + "system-java" + File.separator + "data" + File.separator + entityClass.getSimpleName() + extension;
         fetchData();
     }
 

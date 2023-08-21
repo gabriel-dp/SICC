@@ -1,6 +1,7 @@
 import controller.*;
 import model.*;
 import persistence.*;
+import view.TelaLogin;
 
 public class Program {
 
@@ -16,6 +17,9 @@ public class Program {
 
         System.out.println(user1);
         System.out.println(user2);
+
+        TelaLogin telaLogin = new TelaLogin();
+        telaLogin.setVisible(true);
 
     }
 
