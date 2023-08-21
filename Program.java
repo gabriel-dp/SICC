@@ -1,4 +1,4 @@
-import control.*;
+import controller.*;
 import model.*;
 import persistence.*;
 
