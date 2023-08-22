@@ -1,6 +1,7 @@
 import controller.*;
 import model.*;
 import persistence.*;
+import view.AppFrame;
 
 public class Program {
 
@@ -10,7 +11,8 @@ public class Program {
         userManager.create(new UserAdmin("admin", "12345", "TESTE", "TESTADOR"));
 
         AppController controller = new AppController();
-        controller.start();
+        AppFrame frame = new AppFrame(controller);
+        frame.setVisible(true);
 
     }
 

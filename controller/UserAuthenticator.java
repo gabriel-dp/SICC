@@ -13,6 +13,10 @@ public class UserAuthenticator {
 
     public UserAuthenticator() {
         usernameHash = new HashMap<>();
+        fillHash();
+    }
+
+    private void fillHash() {
         ArrayList<User> allUsers = dataManager.getAllData();
         for (User user : allUsers) {
             usernameHash.put(user.getUsername(), user);
@@ -24,6 +28,11 @@ public class UserAuthenticator {
         if (findedUser == null || !findedUser.getPassword().equals(password))
             return null;
         return findedUser;
+    }
+
+    public void refresh() {
+        usernameHash.clear();
+        fillHash();
     }
 
 }

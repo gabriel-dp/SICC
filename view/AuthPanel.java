@@ -1,17 +1,15 @@
 package view;
 
+import java.awt.event.*;
 import javax.swing.*;
 
-import java.awt.event.*;
-
-import controller.AppController;
-
-public class AuthPanel extends JPanel {
+public class AuthPanel extends AppPanel {
 
     private JTextField tfUser;
     private JPasswordField pwfUser;
 
-    public AuthPanel(AppFrame frame, AppController controller) {
+    public AuthPanel(AppFrame frame) {
+        super(frame);
 
         JLabel lblNewLabel = new JLabel("Fazer login");
         this.add(lblNewLabel);
@@ -35,21 +33,24 @@ public class AuthPanel extends JPanel {
         JButton btnLogin = new JButton("Entrar na conta");
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                attemptLogin(frame, controller);
+                handleLoginButtonClick();
             }
         });
         this.add(btnLogin);
-
     }
 
-    public void attemptLogin(AppFrame frame, AppController controller) {
+    public void handleLoginButtonClick() {
         String username = tfUser.getText();
         String password = new String(pwfUser.getPassword());
 
         // More username and password verifications
 
-        if (controller.login(username, password)) {
-            frame.showPanel("services");
+        attemptLogin(username, password);
+    }
+
+    private void attemptLogin(String username, String password) {
+        if (frame.getController().login(username, password)) {
+            frame.showServices();
         } else {
             JOptionPane.showMessageDialog(null, "Falha no login. Verifique suas credenciais.");
         }
