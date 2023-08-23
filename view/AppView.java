@@ -2,15 +2,11 @@ package view;
 
 import javax.swing.*;
 
-import controller.AppController;
+public class AppView extends JFrame {
 
-public class AppFrame extends JFrame {
+    private static AppView instance = null;
 
-    private AppController controller;
-
-    public AppFrame(AppController controller) {
-        this.controller = controller;
-
+    private AppView() {
         // Default frame settings
         this.setTitle("System");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,18 +17,20 @@ public class AppFrame extends JFrame {
         showAuth();
     }
 
+    public static AppView getInstance() {
+        if (instance == null)
+            instance = new AppView();
+        return instance;
+    }
+
     public void showAuth() {
-        this.setContentPane(new AuthPanel(this));
+        this.setContentPane(new AuthPanel());
         this.revalidate();
     }
 
     public void showServices() {
-        this.setContentPane(new ServicesPanel(this));
+        this.setContentPane(new ServicesPanel());
         this.revalidate();
-    }
-
-    public AppController getController() {
-        return controller;
     }
 
 }

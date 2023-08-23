@@ -3,13 +3,14 @@ package view;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class AuthPanel extends AppPanel {
+import controller.AppController;
+
+public class AuthPanel extends JPanel {
 
     private JTextField tfUser;
     private JPasswordField pwfUser;
 
-    public AuthPanel(AppFrame frame) {
-        super(frame);
+    public AuthPanel() {
 
         JLabel lblNewLabel = new JLabel("Fazer login");
         this.add(lblNewLabel);
@@ -49,8 +50,8 @@ public class AuthPanel extends AppPanel {
     }
 
     private void attemptLogin(String username, String password) {
-        if (frame.getController().login(username, password)) {
-            frame.showServices();
+        if (AppController.getInstance().login(username, password)) {
+            AppView.getInstance().showServices();
         } else {
             JOptionPane.showMessageDialog(null, "Falha no login. Verifique suas credenciais.");
         }

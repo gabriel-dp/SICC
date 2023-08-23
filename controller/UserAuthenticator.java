@@ -8,19 +8,30 @@ import persistence.DataManager;
 
 public class UserAuthenticator {
 
-    private HashMap<String, User> usernameHash;
-    private DataManager<User> dataManager = new DataManager<>(User.class);
+    private static UserAuthenticator instance = null;
 
-    public UserAuthenticator() {
-        usernameHash = new HashMap<>();
-        fillHash();
+    private HashMap<String, User> usernameHash = new HashMap<>();
+
+    private UserAuthenticator() {
+        refresh();
+    }
+
+    public static UserAuthenticator getInstance() {
+        if (instance == null)
+            instance = new UserAuthenticator();
+        return instance;
     }
 
     private void fillHash() {
-        ArrayList<User> allUsers = dataManager.getAllData();
+        ArrayList<User> allUsers = new DataManager<>(User.class).getAllData();
         for (User user : allUsers) {
             usernameHash.put(user.getUsername(), user);
         }
+    }
+
+    public void refresh() {
+        usernameHash.clear();
+        fillHash();
     }
 
     public User authenticate(String username, String password) {
@@ -28,11 +39,6 @@ public class UserAuthenticator {
         if (findedUser == null || !findedUser.getPassword().equals(password))
             return null;
         return findedUser;
-    }
-
-    public void refresh() {
-        usernameHash.clear();
-        fillHash();
     }
 
 }

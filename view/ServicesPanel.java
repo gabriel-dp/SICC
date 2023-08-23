@@ -3,13 +3,27 @@ package view;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ServicesPanel extends AppPanel {
+import controller.AppController;
 
-    public ServicesPanel(AppFrame frame) {
-        super(frame);
+public class ServicesPanel extends JPanel {
 
-        JLabel lblNewLabel = new JLabel(String.format("Welcome - %s", frame.getController().getUserAuthenticated()));
+    public ServicesPanel() {
+
+        JLabel lblNewLabel = new JLabel(
+                String.format("Welcome - %s", AppController.getInstance().getUserAuthenticated()));
         this.add(lblNewLabel);
+
+        switch (AppController.getInstance().getUserAuthenticated().getRole()) {
+            case "Admin":
+                this.add(new ServicesAdminPanel());
+                break;
+            case "Student":
+                this.add(new ServicesStudentPanel());
+                break;
+            default:
+                System.out.println("Vagabundo");
+                break;
+        }
 
         JButton btnLogin = new JButton("Sair");
         btnLogin.addActionListener(new ActionListener() {
@@ -25,8 +39,8 @@ public class ServicesPanel extends AppPanel {
     }
 
     private void logout() {
-        frame.getController().logout();
-        frame.showAuth();
+        AppController.getInstance().logout();
+        AppView.getInstance().showAuth();
     }
 
 }
