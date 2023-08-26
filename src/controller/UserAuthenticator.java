@@ -1,10 +1,10 @@
-package controller;
+package src.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import model.User;
-import persistence.DataManager;
+import src.model.User;
+import src.persistence.DataManager;
 
 public class UserAuthenticator {
 

@@ -1,12 +1,12 @@
-package view;
+package src.view;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import controller.AppController;
-import model.User;
+import src.controller.AppController;
+import src.model.User;
 
 public class ServicesPanel extends JPanel {
 

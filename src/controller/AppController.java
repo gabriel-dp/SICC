@@ -1,6 +1,6 @@
-package controller;
+package src.controller;
 
-import model.User;
+import src.model.User;
 
 public class AppController {
 

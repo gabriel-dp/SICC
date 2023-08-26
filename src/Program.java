@@ -1,6 +1,8 @@
-import model.*;
-import persistence.DataManager;
-import view.AppView;
+package src;
+
+import src.model.*;
+import src.persistence.DataManager;
+import src.view.AppView;
 
 public class Program {
 

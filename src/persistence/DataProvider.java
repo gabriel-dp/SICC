@@ -1,8 +1,8 @@
-package persistence;
+package src.persistence;
 
 import java.util.HashMap;
 
-import model.Entity;
+import src.model.Entity;
 
 public abstract class DataProvider<T extends Entity> {
 

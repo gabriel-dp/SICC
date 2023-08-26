@@ -1,10 +1,10 @@
-package view;
+package src.view;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import view.entity.*;
+import src.view.entity.*;
 
 public class ServicesPanelAdmin extends JPanel {
 

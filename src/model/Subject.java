@@ -1,4 +1,4 @@
-package model;
+package src.model;
 
 public class Subject extends Entity {
 

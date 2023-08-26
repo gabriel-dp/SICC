@@ -1,10 +1,10 @@
-package view;
+package src.view;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import controller.AppController;
+import src.controller.AppController;
 
 public class AuthPanel extends JPanel {
 

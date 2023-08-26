@@ -1,8 +1,8 @@
-package persistence;
+package src.persistence;
 
 import java.util.ArrayList;
 
-import model.Entity;
+import src.model.Entity;
 
 public class DataManager<T extends Entity> {
 

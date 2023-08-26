@@ -1,10 +1,10 @@
-package persistence;
+package src.persistence;
 
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
 
-import model.Entity;
+import src.model.Entity;
 
 @SuppressWarnings("unchecked")
 public class DataProviderFile<T extends Entity> extends DataProvider<T> {
@@ -14,7 +14,8 @@ public class DataProviderFile<T extends Entity> extends DataProvider<T> {
     private String filePath;
 
     public DataProviderFile(Class<T> entityClass) {
-        filePath = directory + File.separator + "system-java" + File.separator + "data" + File.separator + entityClass.getSimpleName() + extension;
+        filePath = directory + File.separator + "system-java" + File.separator + "data" + File.separator
+                + entityClass.getSimpleName() + extension;
         fetchData();
     }
 

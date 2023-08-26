@@ -1,4 +1,4 @@
-package view.entity;
+package src.view.entity;
 
 import javax.swing.JPanel;
 
