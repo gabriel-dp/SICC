@@ -1,5 +1,8 @@
 package src.controller;
 
+import src.controller.auth.UserAuthenticator;
+import src.controller.auth.UserCredentialsException;
+import src.controller.auth.UserNotFoundException;
 import src.model.User;
 
 public class AppController {
@@ -17,9 +20,8 @@ public class AppController {
         return userAuthenticated;
     }
 
-    public boolean login(String username, String password) {
+    public void login(String username, String password) throws UserNotFoundException, UserCredentialsException {
         userAuthenticated = UserAuthenticator.getInstance().authenticate(username, password);
-        return userAuthenticated != null;
     }
 
     public void logout() {

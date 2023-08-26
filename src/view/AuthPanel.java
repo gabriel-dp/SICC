@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import src.controller.AppController;
+import src.controller.auth.UserCredentialsException;
+import src.controller.auth.UserNotFoundException;
 
 public class AuthPanel extends JPanel {
 
@@ -63,18 +65,26 @@ public class AuthPanel extends JPanel {
         String username = tfUser.getText();
         String password = new String(tfPass.getPassword());
 
-        // More username and password verifications
-
-        attemptLogin(username, password);
+        if (username.isEmpty() || password.isEmpty()) {
+            loginFailure("Preencha todos os campos");
+        } else {
+            attemptLogin(username, password);
+        }
     }
 
     private void attemptLogin(String username, String password) {
-        if (AppController.getInstance().login(username, password)) {
+        try {
+            AppController.getInstance().login(username, password);
             AppView.getInstance().showServices();
-        } else {
-            JOptionPane.showMessageDialog(null, "Falha no login. Verifique suas credenciais.", "Aviso",
-                    JOptionPane.WARNING_MESSAGE);
+        } catch (UserNotFoundException ex) {
+            loginFailure("Usuário não encontrado");
+        } catch (UserCredentialsException ex) {
+            loginFailure("Credenciais inválidas");
         }
+    }
+
+    private void loginFailure(String message) {
+        JOptionPane.showMessageDialog(this, message, "Falha no login", JOptionPane.WARNING_MESSAGE);
     }
 
 }
