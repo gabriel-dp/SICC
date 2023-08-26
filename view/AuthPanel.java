@@ -1,7 +1,6 @@
 package view;
 
-import java.awt.Font;
-import java.awt.SystemColor;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -10,55 +9,59 @@ import controller.AppController;
 public class AuthPanel extends JPanel {
 
     private JTextField tfUser;
-    private JPasswordField pwfUser;
+    private JPasswordField tfPass;
 
     public AuthPanel() {
-        setLayout(null);
+        // Layout to center the content
+        this.setLayout(new GridBagLayout());
 
-        JLabel lblNewLabel = new JLabel("Fazer login");
-        lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
-		lblNewLabel.setBounds(330, 50, 150, 30);
-        this.add(lblNewLabel);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        JLabel lblNewLabel_1 = new JLabel("Usuário");
-        lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		lblNewLabel_1.setBounds(250, 160, 74, 14);
-        this.add(lblNewLabel_1);
+        JLabel titleLabel = new JLabel("LOGIN");
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 20));
+        mainPanel.add(titleLabel);
 
+        // Vertical margin
+        mainPanel.add(Box.createVerticalStrut(20));
+
+        JPanel subpanelUser = new JPanel();
+        subpanelUser.setAlignmentX(Component.CENTER_ALIGNMENT);
+        subpanelUser.setBorder(BorderFactory.createTitledBorder("Usuário"));
         tfUser = new JTextField();
-        tfUser.setBackground(SystemColor.inactiveCaption);
-		tfUser.setBounds(330, 150, 190, 30);
-        tfUser.setColumns(10);
-        this.add(tfUser);
+        tfUser.setPreferredSize(new Dimension(200, 20));
+        subpanelUser.add(tfUser);
+        mainPanel.add(subpanelUser);
 
-        JLabel lblNewLabel_1_1 = new JLabel("Senha");
-        lblNewLabel_1_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		lblNewLabel_1_1.setBounds(250, 250, 74, 14);
-        this.add(lblNewLabel_1_1);
+        JPanel subpanelPass = new JPanel();
+        subpanelPass.setBorder(BorderFactory.createTitledBorder("Senha"));
+        subpanelPass.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tfPass = new JPasswordField();
+        tfPass.setEchoChar('*');
+        tfPass.setPreferredSize(new Dimension(200, 20));
+        subpanelPass.add(tfPass);
+        mainPanel.add(subpanelPass);
 
-        pwfUser = new JPasswordField();
-        pwfUser.setEchoChar('*');
-        pwfUser.setBackground(SystemColor.inactiveCaption);
-		pwfUser.setBounds(330, 240, 190, 30);
-        pwfUser.setToolTipText("");
-        pwfUser.setColumns(10);
-        this.add(pwfUser);
+        // Vertical margin
+        mainPanel.add(Box.createVerticalStrut(20));
 
-        JButton btnLogin = new JButton("Entrar na conta");
+        JButton btnLogin = new JButton("ENTRAR");
+        btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnLogin.setPreferredSize(new Dimension(150, 30));
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 handleLoginButtonClick();
             }
         });
-		btnLogin.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		btnLogin.setBounds(310, 330, 190, 31);
-        btnLogin.setBackground(SystemColor.LIGHT_GRAY);
-        this.add(btnLogin);
+        mainPanel.add(btnLogin);
+
+        this.add(mainPanel);
     }
 
     public void handleLoginButtonClick() {
         String username = tfUser.getText();
-        String password = new String(pwfUser.getPassword());
+        String password = new String(tfPass.getPassword());
 
         // More username and password verifications
 
@@ -69,7 +72,8 @@ public class AuthPanel extends JPanel {
         if (AppController.getInstance().login(username, password)) {
             AppView.getInstance().showServices();
         } else {
-            JOptionPane.showMessageDialog(null, "Falha no login. Verifique suas credenciais.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Falha no login. Verifique suas credenciais.", "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
