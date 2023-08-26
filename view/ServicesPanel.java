@@ -1,37 +1,52 @@
 package view;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import controller.AppController;
+import model.User;
 
 public class ServicesPanel extends JPanel {
 
-    public ServicesPanel() {
+    private User user = AppController.getInstance().getUserAuthenticated();
+    private String userFullName = user.getFirstName() + ' ' + user.getLastName();
+    private String userRole;
 
-        JLabel lblNewLabel = new JLabel(
-                String.format("Welcome - %s", AppController.getInstance().getUserAuthenticated()));
-        this.add(lblNewLabel);
+    public ServicesPanel() {
+        this.setLayout(new BorderLayout());
 
         switch (AppController.getInstance().getUserAuthenticated().getRole()) {
             case ADMIN:
-                this.add(new ServicesAdminPanel());
+                this.add(new ServicesAdminPanel(), BorderLayout.CENTER);
+                userRole = "Administrador";
                 break;
             case STUDENT:
-                this.add(new ServicesStudentPanel());
+                this.add(new ServicesStudentPanel(), BorderLayout.CENTER);
+                userRole = "Estudante";
                 break;
             default:
-                System.out.println("Unknowed role");
+                userRole = "Cargo desconhecido";
                 break;
         }
 
-        JButton btnLogin = new JButton("Sair");
-        btnLogin.addActionListener(new ActionListener() {
+        JPanel generalPanel = new JPanel(new BorderLayout());
+        generalPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        generalPanel.setBackground(new Color(10, 200, 150));
+
+        JLabel labelUser = new JLabel(String.format("%s (%s)", userFullName, userRole));
+        generalPanel.add(labelUser, BorderLayout.CENTER);
+
+        JButton btnLogout = new JButton("Sair");
+        btnLogout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 handleLogoutButtonClick();
             }
         });
-        this.add(btnLogin);
+        generalPanel.add(btnLogout, BorderLayout.LINE_END);
+
+        this.add(generalPanel, BorderLayout.SOUTH);
     }
 
     private void handleLogoutButtonClick() {
