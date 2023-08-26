@@ -14,14 +14,14 @@ public class ServicesPanel extends JPanel {
         this.add(lblNewLabel);
 
         switch (AppController.getInstance().getUserAuthenticated().getRole()) {
-            case "Admin":
+            case ADMIN:
                 this.add(new ServicesAdminPanel());
                 break;
-            case "Student":
+            case STUDENT:
                 this.add(new ServicesStudentPanel());
                 break;
             default:
-                System.out.println("Vagabundo");
+                System.out.println("Unknowed role");
                 break;
         }
 
