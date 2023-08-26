@@ -2,9 +2,9 @@ package view;
 
 import javax.swing.*;
 
-public class ServicesStudentPanel extends JPanel {
+public class ServicesPanelStudent extends JPanel {
 
-    public ServicesStudentPanel() {
+    public ServicesPanelStudent() {
 
         JLabel lblNewLabel = new JLabel(String.format("You are a student"));
         this.add(lblNewLabel);

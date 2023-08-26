@@ -19,11 +19,11 @@ public class ServicesPanel extends JPanel {
 
         switch (AppController.getInstance().getUserAuthenticated().getRole()) {
             case ADMIN:
-                this.add(new ServicesAdminPanel(), BorderLayout.CENTER);
+                this.add(new ServicesPanelAdmin(), BorderLayout.CENTER);
                 userRole = "Administrador";
                 break;
             case STUDENT:
-                this.add(new ServicesStudentPanel(), BorderLayout.CENTER);
+                this.add(new ServicesPanelStudent(), BorderLayout.CENTER);
                 userRole = "Estudante";
                 break;
             default:
@@ -46,7 +46,7 @@ public class ServicesPanel extends JPanel {
         });
         generalPanel.add(btnLogout, BorderLayout.LINE_END);
 
-        this.add(generalPanel, BorderLayout.SOUTH);
+        this.add(generalPanel, BorderLayout.PAGE_END);
     }
 
     private void handleLogoutButtonClick() {
