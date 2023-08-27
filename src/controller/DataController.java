@@ -1,15 +1,18 @@
-package src.persistence;
+package src.controller;
 
 import java.util.ArrayList;
 
 import src.model.Entity;
+import src.persistence.DataProvider;
+import src.persistence.DataProviderFile;
 
-public class DataManager<T extends Entity> {
+public class DataController<T extends Entity> {
 
     private DataProvider<T> provider;
 
-    public DataManager(Class<T> entityClass) {
+    public DataController(Class<T> entityClass) {
         provider = new DataProviderFile<T>(entityClass);
+        provider.fetchData();
     }
 
     public T search(String id) {

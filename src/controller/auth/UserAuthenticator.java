@@ -2,8 +2,8 @@ package src.controller.auth;
 
 import java.util.HashMap;
 
+import src.controller.DataController;
 import src.model.User;
-import src.persistence.DataManager;
 
 public class UserAuthenticator {
 
@@ -22,7 +22,7 @@ public class UserAuthenticator {
     }
 
     private void fillUsernameHash() {
-        for (User user : new DataManager<>(User.class).getAllData()) {
+        for (User user : new DataController<>(User.class).getAllData()) {
             usernameHash.put(user.getUsername(), user);
         }
     }
