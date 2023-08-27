@@ -11,23 +11,28 @@ import src.controller.auth.UserNotFoundException;
 public class AuthPanel extends JPanel {
 
     private JTextField tfUser;
-    private JPasswordField tfPass;
+    private JPasswordField pfPass;
 
     public AuthPanel() {
-        // Layout to center the content
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new GridBagLayout()); // Layout to center the content
+        this.add(createLoginPanel());
+    }
 
+    private JPanel createLoginPanel() {
+        // Panel to group and centralize objects in Y axis
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        JLabel titleLabel = new JLabel("LOGIN");
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 20));
-        mainPanel.add(titleLabel);
+        // Login title
+        JLabel labelTitle = new JLabel("LOGIN");
+        labelTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        labelTitle.setFont(labelTitle.getFont().deriveFont(Font.BOLD, 20));
+        mainPanel.add(labelTitle);
 
         // Vertical margin
         mainPanel.add(Box.createVerticalStrut(20));
 
+        // Username field
         JPanel subpanelUser = new JPanel();
         subpanelUser.setAlignmentX(Component.CENTER_ALIGNMENT);
         subpanelUser.setBorder(BorderFactory.createTitledBorder("Usuário"));
@@ -36,34 +41,36 @@ public class AuthPanel extends JPanel {
         subpanelUser.add(tfUser);
         mainPanel.add(subpanelUser);
 
+        // Password field
         JPanel subpanelPass = new JPanel();
         subpanelPass.setBorder(BorderFactory.createTitledBorder("Senha"));
         subpanelPass.setAlignmentX(Component.CENTER_ALIGNMENT);
-        tfPass = new JPasswordField();
-        tfPass.setEchoChar('*');
-        tfPass.setPreferredSize(new Dimension(200, 20));
-        subpanelPass.add(tfPass);
+        pfPass = new JPasswordField();
+        pfPass.setEchoChar('*');
+        pfPass.setPreferredSize(new Dimension(200, 20));
+        subpanelPass.add(pfPass);
         mainPanel.add(subpanelPass);
 
         // Vertical margin
         mainPanel.add(Box.createVerticalStrut(20));
 
-        JButton btnLogin = new JButton("ENTRAR");
-        btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnLogin.setPreferredSize(new Dimension(150, 30));
-        btnLogin.addActionListener(new ActionListener() {
+        // Login button
+        JButton buttonLogin = new JButton("ENTRAR");
+        buttonLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonLogin.setPreferredSize(new Dimension(150, 30));
+        buttonLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 handleLoginButtonClick();
             }
         });
-        mainPanel.add(btnLogin);
+        mainPanel.add(buttonLogin);
 
-        this.add(mainPanel);
+        return mainPanel;
     }
 
-    public void handleLoginButtonClick() {
+    private void handleLoginButtonClick() {
         String username = tfUser.getText();
-        String password = new String(tfPass.getPassword());
+        String password = new String(pfPass.getPassword());
 
         if (username.isEmpty() || password.isEmpty()) {
             loginFailure("Preencha todos os campos");

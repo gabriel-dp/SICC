@@ -23,9 +23,8 @@ public class ServicesPanelAdmin extends JPanel {
         this.setLayout(new BorderLayout());
 
         JPanel navPanel = new JPanel(new GridLayout(1, services.length));
-
         for (EntityServices s : services) {
-            navPanel.add(createMainButton(s.getTitle()));
+            navPanel.add(createNavButton(s.getTitle()));
             mainPanel.add(s, s.getTitle());
         }
 
@@ -34,7 +33,7 @@ public class ServicesPanelAdmin extends JPanel {
     }
 
     // Creates a main button with the event to redirects to the desired panel
-    private JButton createMainButton(String title) {
+    private JButton createNavButton(String title) {
         JButton button = new JButton(title);
 
         button.addActionListener(new ActionListener() {

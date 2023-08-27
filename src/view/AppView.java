@@ -29,7 +29,7 @@ public class AppView extends JFrame {
     }
 
     public void showServices() {
-        this.setContentPane(new ServicesPanel());
+        this.setContentPane(new ServicesPanelGeneral());
         this.revalidate();
     }
 

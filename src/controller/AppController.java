@@ -8,7 +8,7 @@ import src.model.User;
 public class AppController {
 
     private static AppController instance = null;
-    private static User userAuthenticated = null;
+    private User userAuthenticated = null;
 
     public static AppController getInstance() {
         if (instance == null)
