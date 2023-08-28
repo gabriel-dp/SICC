@@ -1,59 +1,59 @@
 package src.view.entity;
 
 import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-public abstract class EntityServices extends JPanel {
+import src.controller.DataController;
+import src.model.Entity;
+
+public abstract class EntityServices<T extends Entity> extends JPanel {
 
     private String title;
+    private DataController<T> dataController;
 
     private GridBagLayout formGridBagLayout = new GridBagLayout();
-    protected JPanel formPanel = new JPanel(formGridBagLayout);
+    private JPanel formPanel = new JPanel(formGridBagLayout);
 
     protected DefaultTableModel tableModel = new DefaultTableModel();
-    protected JTable table = new JTable(tableModel) {
-        // Disable table edition by user
-        public boolean isCellEditable(int row, int column) {
-            return false;
-        };
-    };
+    protected JTable table = new JTable(tableModel);
 
-    public EntityServices(String title) {
+    public EntityServices(String title, Class<T> entityClass) {
         this.title = title;
+        dataController = new DataController<>(entityClass);
+
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        // Title
-        mainPanel.add(createTitleLabel());
-        // Margin
-        mainPanel.add(Box.createVerticalStrut(15));
-        // Form
-        defineFormPanel();
+        mainPanel.add(createTitleLabel()); // Title
+        mainPanel.add(Box.createVerticalStrut(15)); // Margin
+        defineFormPanel(); // Form
         mainPanel.add(formPanel);
-        // Margin
-        mainPanel.add(Box.createVerticalStrut(15));
-        // Buttons
-        mainPanel.add(createActionButtons());
-        // Margin
-        mainPanel.add(Box.createVerticalStrut(15));
-        // Table
-        mainPanel.add(createScrollTable());
-        loadTableData();
+        mainPanel.add(Box.createVerticalStrut(15)); // Margin
+        mainPanel.add(createActionButtons()); // Buttons
+        mainPanel.add(Box.createVerticalStrut(15)); // Margin
+        mainPanel.add(createScrollTable()); // Table
+        loadTable();
 
         this.add(mainPanel);
     }
 
     protected abstract void defineFormPanel();
 
+    protected abstract void clearForm();
+
+    protected abstract void checkForm() throws Exception;
+
+    protected abstract T createEntity();
+
     protected abstract void defineTable();
 
-    protected abstract void loadTableData();
+    protected abstract ArrayList<Object[]> getTableData(DataController<T> dc);
 
     public String getTitle() {
         return title;
@@ -81,15 +81,38 @@ public abstract class EntityServices extends JPanel {
         JPanel subpanel = new JPanel(new FlowLayout());
         subpanel.setBorder(BorderFactory.createTitledBorder(name));
 
-        tf.setColumns((15 * width) + (2 * (width - 1)));
-        subpanel.add(tf);
+        int tfColumns = (15 * width) + (2 * (width - 1));
+        tf.setColumns(tfColumns);
 
+        subpanel.add(tf);
         addFormPanelGrid(subpanel, x, y, width);
     }
 
     private JPanel createActionButtons() {
         JButton addButton = new JButton("Adicionar");
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    checkForm();
+                    dataController.create(createEntity());
+                    loadTable();
+                    clearForm();
+                } catch (Exception ex) {
+
+                }
+            }
+        });
+
         JButton delButton = new JButton("Remover");
+        delButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int index = table.getSelectedRow();
+                if (index != -1) {
+                    dataController.delete((String) table.getValueAt(index, 0));
+                    loadTable();
+                }
+            }
+        });
 
         JButton buttons[] = { addButton, delButton };
         JPanel buttonsPanel = new JPanel(new GridLayout(1, buttons.length, 15, 0));
@@ -101,24 +124,33 @@ public abstract class EntityServices extends JPanel {
     }
 
     private JScrollPane createScrollTable() {
-        // Event to fillForm() every time user clicks on a table element
-        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent event) {
-                if (table.getSelectedRow() >= 0) {
-                    // fillForm();
-                }
-            }
-        });
-
         defineTable();
-        table.getTableHeader().setReorderingAllowed(false);
+
+        // Table propertiers
+        table.setDefaultEditor(Object.class, null); // Disable cell editing
+        table.getTableHeader().setReorderingAllowed(false); // Disable columns reorder
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Disable multi-select rows
 
         // Creates scrollable panel to contain table
         JScrollPane scrollable = new JScrollPane();
-        scrollable.setPreferredSize(new Dimension(600, 325));
+        scrollable.setPreferredSize(new Dimension(600, 200));
         scrollable.setViewportView(table);
 
         return scrollable;
+    }
+
+    private void loadTable() {
+        // Resets table data
+        tableModel.setNumRows(0);
+
+        // Adds all rows to the table
+        for (Object[] row : getTableData(dataController)) {
+            tableModel.addRow(row);
+        }
+
+        // Turn Id column invisible
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
 }

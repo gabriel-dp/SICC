@@ -1,18 +1,20 @@
 package src.view.entity;
 
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 import src.controller.DataController;
 import src.model.Professor;
 
-public class ProfessorServices extends EntityServices {
+public class ProfessorServices extends EntityServices<Professor> {
 
     private static JTextField tfFirstName = new JTextField();
     private static JTextField tfLastName = new JTextField();
     private static JTextField tfEmail = new JTextField();
 
     public ProfessorServices() {
-        super("Professores");
+        super("Professores", Professor.class);
     }
 
     protected void defineFormPanel() {
@@ -22,21 +24,41 @@ public class ProfessorServices extends EntityServices {
     }
 
     protected void defineTable() {
+        tableModel.addColumn("Id");
         tableModel.addColumn("Nome");
         tableModel.addColumn("Email");
     }
 
-    protected void loadTableData() {
-        // Resets table data
-        tableModel.setNumRows(0);
+    protected ArrayList<Object[]> getTableData(DataController<Professor> dc) {
+        ArrayList<Object[]> data = new ArrayList<>();
 
-        DataController<Professor> dc = new DataController<>(Professor.class);
         for (Professor p : dc.getAllData()) {
             String name = p.getFirstName() + ' ' + p.getLastName();
-            Object data[] = { name, p.getEmail() };
-            tableModel.addRow(data);
+            Object row[] = { p.getId(), name, p.getEmail() };
+            data.add(row);
         }
 
+        return data;
+    }
+
+    protected void clearForm() {
+        tfFirstName.setText("");
+        tfLastName.setText("");
+        tfEmail.setText("");
+    }
+
+    protected void checkForm() throws Exception {
+        if (tfFirstName.getText().isBlank() || tfLastName.getText().isBlank() || tfEmail.getText().isBlank()) {
+            throw new Exception("Campos inválidos");
+        }
+    }
+
+    protected Professor createEntity() {
+        String firstName = tfFirstName.getText();
+        String lastName = tfLastName.getText();
+        String email = tfEmail.getText();
+
+        return new Professor(firstName, lastName, email);
     }
 
 }
