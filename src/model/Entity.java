@@ -1,11 +1,14 @@
 package src.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 public abstract class Entity implements Serializable {
 
-    private String id = UUID.randomUUID().toString();
+    private String id;
+
+    public Entity(String id) {
+        this.id = id;
+    }
 
     public String getId() {
         return id;

@@ -7,6 +7,7 @@ public class Professor extends Entity {
     private String email;
 
     public Professor(String firstName, String lastName, String email) {
+        super(email);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

@@ -48,8 +48,10 @@ public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
     }
 
     protected void checkForm() throws Exception {
-        if (tfFirstName.getText().isBlank() || tfLastName.getText().isBlank() || tfEmail.getText().isBlank()) {
-            throw new Exception("Campos inválidos");
+        if (tfFirstName.getText().isBlank()
+                || tfLastName.getText().isBlank()
+                || tfEmail.getText().isBlank()) {
+            throw new Exception("Invalid inputs");
         }
     }
 

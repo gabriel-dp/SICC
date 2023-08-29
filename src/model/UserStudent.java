@@ -8,7 +8,7 @@ public class UserStudent extends User {
     public UserStudent(String username, String password, String firstName, String lastName, Course course) {
         super(RoleUser.STUDENT, username, password, firstName, lastName);
         this.course = course;
-        curriculum = new Curriculum();
+        curriculum = new Curriculum(username);
     }
 
     public Course getCourse() {

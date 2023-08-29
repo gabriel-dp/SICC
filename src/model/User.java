@@ -9,6 +9,7 @@ public abstract class User extends Entity {
     private String lastName;
 
     public User(RoleUser role, String username, String password, String firstName, String lastName) {
+        super(username);
         this.role = role;
         this.username = username;
         this.password = password;

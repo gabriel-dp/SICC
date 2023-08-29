@@ -4,11 +4,20 @@ import java.util.ArrayList;
 
 public class Course extends Entity {
 
+    private String code;
     private String name;
     private String type;
     private String shift;
     private int semesters;
     private ArrayList<Subject> subjects;
+
+    public Course(String code, String name, String type, String shift, int semesters, ArrayList<Subject> subjects) {
+        super(code);
+    }
+
+    public String getCode() {
+        return code;
+    }
 
     public String getName() {
         return name;

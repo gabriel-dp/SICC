@@ -8,7 +8,8 @@ public class Curriculum extends Entity {
     private Date lastEdit;
     private ArrayList<Subject> subjects;
 
-    public Curriculum() {
+    public Curriculum(String id) {
+        super(id);
         lastEdit = new Date();
         subjects = new ArrayList<>();
     }

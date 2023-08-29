@@ -19,10 +19,11 @@ public class DataController<T extends Entity> {
         return provider.getData().get(id);
     }
 
-    public void create(T entity) {
-        if (search(entity.getId()) == null) {
-            provider.create(entity);
+    public void create(T entity) throws Exception {
+        if (search(entity.getId()) != null) {
+            throw new Exception("This entity already exists");
         }
+        provider.create(entity);
     }
 
     public void delete(String id) {
