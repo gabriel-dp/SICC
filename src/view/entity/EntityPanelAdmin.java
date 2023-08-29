@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import src.controller.DataController;
+import src.controller.EntityAlreadyExistsException;
 import src.model.Entity;
 
 public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
@@ -121,12 +122,15 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
                     dataController.create(createEntity());
                     loadTable();
                     clearForm();
-                } catch(InvalidInputsException exc){
+                } catch (InvalidInputsException exc) {
                     String errorMessage = "Por favor, preencha todos os campos corretamente.";
                     JOptionPane.showMessageDialog(null, errorMessage, "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
+                } catch (EntityAlreadyExistsException eae) {
+                    String errorMessage = "Entidade já existente.";
+                    JOptionPane.showMessageDialog(null, errorMessage, "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
-                } 
+                }
             }
         });
 
