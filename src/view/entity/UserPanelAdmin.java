@@ -106,8 +106,9 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
                 || tfFirstName.getText().isBlank()
                 || tfLastName.getText().isBlank()
                 || (!rbAdmin.isSelected() && !rbStudent.isSelected())
-                || (rbStudent.isSelected() && cbCourses.getSelectedIndex() == 1)) {
-            throw new InvalidInputsException("Invalid inputs");
+        // || (rbStudent.isSelected() && cbCourses.getSelectedIndex() == 0)
+        ) {
+            throw new InvalidInputsException();
         }
 
     }

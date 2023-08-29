@@ -47,11 +47,11 @@ public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
         tfEmail.setText("");
     }
 
-    protected void checkForm() throws Exception {
+    protected void checkForm() throws InvalidInputsException {
         if (tfFirstName.getText().isBlank()
                 || tfLastName.getText().isBlank()
                 || tfEmail.getText().isBlank()) {
-            throw new Exception("Invalid inputs");
+            throw new InvalidInputsException();
         }
     }
 

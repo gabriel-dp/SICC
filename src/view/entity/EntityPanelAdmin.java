@@ -50,7 +50,7 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
 
     protected abstract void clearForm();
 
-    protected abstract void checkForm() throws Exception;
+    protected abstract void checkForm() throws InvalidInputsException;
 
     protected abstract T createEntity();
 
@@ -122,14 +122,12 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
                     dataController.create(createEntity());
                     loadTable();
                     clearForm();
-                } catch (InvalidInputsException exc) {
-                    String errorMessage = "Por favor, preencha todos os campos corretamente.";
-                    JOptionPane.showMessageDialog(null, errorMessage, "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
-                } catch (EntityAlreadyExistsException eae) {
-                    String errorMessage = "Entidade já existente.";
-                    JOptionPane.showMessageDialog(null, errorMessage, "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
+                } catch (InvalidInputsException ex) {
+                    final String errorMessage = "Preencha todos os campos corretamente.";
+                    JOptionPane.showMessageDialog(null, errorMessage, "Falha no cadastro", JOptionPane.WARNING_MESSAGE);
+                } catch (EntityAlreadyExistsException ex) {
+                    final String errorMessage = "Entidade já existente.";
+                    JOptionPane.showMessageDialog(null, errorMessage, "Falha no cadastro", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });

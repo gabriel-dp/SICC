@@ -8,9 +8,11 @@ import src.persistence.DataProviderFile;
 
 public class DataController<T extends Entity> {
 
+    private Class<T> entityClass;
     private DataProvider<T> provider;
 
     public DataController(Class<T> entityClass) {
+        this.entityClass = entityClass;
         provider = new DataProviderFile<T>(entityClass);
         provider.fetchData();
     }
@@ -21,7 +23,7 @@ public class DataController<T extends Entity> {
 
     public void create(T entity) throws EntityAlreadyExistsException {
         if (search(entity.getId()) != null) {
-            throw new EntityAlreadyExistsException("This entity already exists");
+            throw new EntityAlreadyExistsException(entityClass.getSimpleName());
         }
         provider.create(entity);
     }
