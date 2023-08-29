@@ -2,13 +2,12 @@ package src.view.entity;
 
 import javax.swing.*;
 
-public class CourseServices extends EntityServices {
+import src.model.Course;
+
+public class CourseServices extends EntityServices<Course> {
 
     public CourseServices() {
-        super("Cursos");
-
-        JLabel label = new JLabel("Curso");
-        this.add(label);
+        super("Cursos", Course.class);
     }
 
 }

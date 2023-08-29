@@ -12,7 +12,7 @@ public class ServicesPanelAdmin extends JPanel {
     private JPanel mainPanel = new JPanel(mainLayout);
 
     private final EntityServices<?> services[] = {
-            // new UserServices(),
+            new UserServices(),
             // new CurriculumServices(),
             // new CourseServices(),
             // new SubjectServices(),

@@ -9,9 +9,9 @@ import src.model.Professor;
 
 public class ProfessorServices extends EntityServices<Professor> {
 
-    private static JTextField tfFirstName = new JTextField();
-    private static JTextField tfLastName = new JTextField();
-    private static JTextField tfEmail = new JTextField();
+    private static JTextField tfFirstName = new JTextField(),
+            tfLastName = new JTextField(),
+            tfEmail = new JTextField();
 
     public ProfessorServices() {
         super("Professores", Professor.class);

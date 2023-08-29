@@ -3,6 +3,8 @@ package src.view.entity;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -71,7 +73,7 @@ public abstract class EntityServices<T extends Entity> extends JPanel {
         gbc.gridx = x;
         gbc.gridy = y;
         gbc.gridwidth = width;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH;
         formGridBagLayout.setConstraints(component, gbc);
 
         formPanel.add(component);
@@ -88,6 +90,28 @@ public abstract class EntityServices<T extends Entity> extends JPanel {
         addFormPanelGrid(subpanel, x, y, width);
     }
 
+    protected void addRadioButtonsInput(ButtonGroup radioButtons, String name, int x, int y, int width) {
+        JPanel subpanel = new JPanel();
+        subpanel.setLayout(new BoxLayout(subpanel, BoxLayout.Y_AXIS));
+        subpanel.setBorder(BorderFactory.createTitledBorder(name));
+
+        Enumeration<AbstractButton> buttons = radioButtons.getElements();
+        while (buttons.hasMoreElements()) {
+            JRadioButton button = (JRadioButton) buttons.nextElement();
+            subpanel.add(button);
+        }
+
+        addFormPanelGrid(subpanel, x, y, width);
+    }
+
+    protected void addComboBoxInput(JComboBox<Object> comboBox, String name, int x, int y, int width) {
+        JPanel subpanel = new JPanel(new FlowLayout());
+        subpanel.setBorder(BorderFactory.createTitledBorder(name));
+
+        subpanel.add(comboBox);
+        addFormPanelGrid(subpanel, x, y, width);
+    }
+
     private JPanel createActionButtons() {
         JButton addButton = new JButton("Adicionar");
         addButton.addActionListener(new ActionListener() {
@@ -98,7 +122,7 @@ public abstract class EntityServices<T extends Entity> extends JPanel {
                     loadTable();
                     clearForm();
                 } catch (Exception ex) {
-
+                    System.out.println(ex.getMessage());
                 }
             }
         });
