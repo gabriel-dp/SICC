@@ -100,14 +100,14 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
         rbAdmin.setSelected(true);
     }
 
-    protected void checkForm() throws Exception {
+    protected void checkForm() throws InvalidInputsException {
         if (tfUsername.getText().isBlank()
                 || tfPassword.getText().isBlank()
                 || tfFirstName.getText().isBlank()
                 || tfLastName.getText().isBlank()
                 || (!rbAdmin.isSelected() && !rbStudent.isSelected())
                 || (rbStudent.isSelected() && cbCourses.getSelectedIndex() == 1)) {
-            throw new Exception("Invalid inputs");
+            throw new InvalidInputsException("Invalid inputs");
         }
 
     }

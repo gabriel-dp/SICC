@@ -121,9 +121,12 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
                     dataController.create(createEntity());
                     loadTable();
                     clearForm();
+                } catch(InvalidInputsException exc){
+                    String errorMessage = "Por favor, preencha todos os campos corretamente.";
+                    JOptionPane.showMessageDialog(null, errorMessage, "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
-                }
+                } 
             }
         });
 
