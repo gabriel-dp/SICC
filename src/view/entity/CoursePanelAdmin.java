@@ -4,9 +4,9 @@ import javax.swing.*;
 
 import src.model.Course;
 
-public class CourseServices extends EntityServices<Course> {
+public class CoursePanelAdmin extends EntityPanelAdmin<Course> {
 
-    public CourseServices() {
+    public CoursePanelAdmin() {
         super("Cursos", Course.class);
     }
 

@@ -11,7 +11,7 @@ import src.model.User;
 import src.model.UserAdmin;
 import src.model.UserStudent;
 
-public class UserServices extends EntityServices<User> {
+public class UserPanelAdmin extends EntityPanelAdmin<User> {
 
     private static JTextField tfUsername = new JTextField(),
             tfPassword = new JTextField(),
@@ -23,7 +23,7 @@ public class UserServices extends EntityServices<User> {
 
     private static JComboBox<Object> cbCourses = new JComboBox<>();
 
-    public UserServices() {
+    public UserPanelAdmin() {
         super("Usuários", User.class);
     }
 
@@ -35,16 +35,21 @@ public class UserServices extends EntityServices<User> {
 
         rbAdmin.setText("Administrador");
         rbStudent.setText("Estudante");
+        rbAdmin.setSelected(true);
+
+        // ButtonGroup forces just one JRadioButton be selected
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(rbAdmin);
         buttonGroup.add(rbStudent);
-        rbAdmin.setSelected(true);
         addRadioButtonsInput(buttonGroup, "Cargo", 0, 2, 1);
 
+        // Add all Courses in the ComboBox
         cbCourses.addItem("Selecione um curso");
         for (Object c : new DataController<Course>(Course.class).getAllData()) {
             cbCourses.addItem(c);
         }
+
+        // Event makes JComboBox enabled only if Student button is selected
         cbCourses.setEnabled(false);
         rbStudent.addItemListener(e -> {
             cbCourses.setEnabled(e.getStateChange() == ItemEvent.SELECTED);

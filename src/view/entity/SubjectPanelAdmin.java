@@ -4,9 +4,9 @@ import javax.swing.*;
 
 import src.model.Subject;
 
-public class SubjectServices extends EntityServices<Subject> {
+public class SubjectPanelAdmin extends EntityPanelAdmin<Subject> {
 
-    public SubjectServices() {
+    public SubjectPanelAdmin() {
         super("Disciplinas", Subject.class);
 
         JLabel label = new JLabel("Disciplina");

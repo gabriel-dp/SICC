@@ -10,13 +10,13 @@ import src.model.User;
 
 public class ServicesPanelGeneral extends JPanel {
 
-    private User user = AppController.getInstance().getUserAuthenticated();
-    private String userFullName = user.getFirstName() + ' ' + user.getLastName();
-    private String userRole;
-
     public ServicesPanelGeneral() {
         this.setLayout(new BorderLayout());
 
+        // Sets user data to be displayed in general panel
+        User user = AppController.getInstance().getUserAuthenticated();
+        String userFullName = user.getFirstName() + ' ' + user.getLastName();
+        String userRole;
         switch (AppController.getInstance().getUserAuthenticated().getRole()) {
             case ADMIN:
                 this.add(new ServicesPanelAdmin(), BorderLayout.CENTER);
@@ -31,10 +31,10 @@ public class ServicesPanelGeneral extends JPanel {
                 break;
         }
 
-        this.add(createGeneralPanel(), BorderLayout.PAGE_END);
+        this.add(createGeneralPanel(userFullName, userRole), BorderLayout.PAGE_END);
     }
 
-    private JPanel createGeneralPanel() {
+    private JPanel createGeneralPanel(String userFullName, String userRole) {
         JPanel generalPanel = new JPanel(new BorderLayout());
         generalPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
         generalPanel.setBackground(new Color(10, 200, 150));

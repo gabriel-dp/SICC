@@ -11,19 +11,19 @@ public class ServicesPanelAdmin extends JPanel {
     private CardLayout mainLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(mainLayout);
 
-    private final EntityServices<?> services[] = {
-            new UserServices(),
-            // new CurriculumServices(),
+    // Defines which panels will appear
+    private final EntityPanelAdmin<?> services[] = {
+            new UserPanelAdmin(),
             // new CourseServices(),
             // new SubjectServices(),
-            new ProfessorServices()
+            new ProfessorPanelAdmin()
     };
 
     public ServicesPanelAdmin() {
         this.setLayout(new BorderLayout());
 
         JPanel navPanel = new JPanel(new GridLayout(1, services.length));
-        for (EntityServices<?> s : services) {
+        for (EntityPanelAdmin<?> s : services) {
             navPanel.add(createNavButton(s.getTitle()));
             mainPanel.add(s, s.getTitle());
         }

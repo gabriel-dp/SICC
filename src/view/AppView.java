@@ -14,9 +14,11 @@ public class AppView extends JFrame {
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
 
+        // Initial panel
         showAuth();
     }
 
+    // Singleton lazy initialization
     public static AppView getInstance() {
         if (instance == null)
             instance = new AppView();

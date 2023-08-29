@@ -7,13 +7,13 @@ import javax.swing.*;
 import src.controller.DataController;
 import src.model.Professor;
 
-public class ProfessorServices extends EntityServices<Professor> {
+public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
 
     private static JTextField tfFirstName = new JTextField(),
             tfLastName = new JTextField(),
             tfEmail = new JTextField();
 
-    public ProfessorServices() {
+    public ProfessorPanelAdmin() {
         super("Professores", Professor.class);
     }
 

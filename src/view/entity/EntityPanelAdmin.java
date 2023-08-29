@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import src.controller.DataController;
 import src.model.Entity;
 
-public abstract class EntityServices<T extends Entity> extends JPanel {
+public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
 
     private String title;
     private DataController<T> dataController;
@@ -23,7 +23,7 @@ public abstract class EntityServices<T extends Entity> extends JPanel {
     protected DefaultTableModel tableModel = new DefaultTableModel();
     protected JTable table = new JTable(tableModel);
 
-    public EntityServices(String title, Class<T> entityClass) {
+    public EntityPanelAdmin(String title, Class<T> entityClass) {
         this.title = title;
         dataController = new DataController<>(entityClass);
 
