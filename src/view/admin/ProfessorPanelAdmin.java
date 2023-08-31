@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import src.controller.DataController;
+import src.controller.AppController;
 import src.model.Professor;
 
 public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
@@ -14,7 +14,7 @@ public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
             tfEmail = new JTextField();
 
     public ProfessorPanelAdmin() {
-        super("Professores", Professor.class);
+        super("Professores", AppController.getControllerProfessor());
     }
 
     protected void defineFormPanel() {
@@ -33,10 +33,10 @@ public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
         table.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
-    protected ArrayList<Object[]> getTableData(DataController<Professor> dc) {
+    protected ArrayList<Object[]> getTableData() {
         ArrayList<Object[]> data = new ArrayList<>();
 
-        for (Professor p : dc.getAllData()) {
+        for (Professor p : dataController.getAllData()) {
             String name = p.getFirstName() + ' ' + p.getLastName();
             Object row[] = { p.getId(), name, p.getEmail() };
             data.add(row);

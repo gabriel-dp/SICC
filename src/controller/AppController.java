@@ -1,31 +1,53 @@
 package src.controller;
 
-import src.controller.auth.UserAuthenticator;
-import src.controller.auth.UserCredentialsException;
-import src.controller.auth.UserNotFoundException;
-import src.model.User;
+import src.controller.auth.*;
+import src.model.*;
 
 public class AppController {
 
-    private static AppController instance = null;
-    private User userAuthenticated = null;
+    private static User userAuthenticated = null;
 
-    public static AppController getInstance() {
-        if (instance == null)
-            instance = new AppController();
-        return instance;
+    // Individual data controllers
+    private static DataController<User> controllerUser = new DataController<>(User.class);
+    private static DataController<Course> controllerCourse = new DataController<>(Course.class);
+    private static DataController<Subject> controllerSubject = new DataController<>(Subject.class);
+    private static DataController<Professor> controllerProfessor = new DataController<>(Professor.class);
+    private static DataController<Curriculum> controllerCurriculum = new DataController<>(Curriculum.class);
+
+    private AppController() {
+        // Prevents instantiation
     }
 
-    public User getUserAuthenticated() {
+    public static void login(String username, String password) throws UserNotFoundException, UserCredentialsException {
+        userAuthenticated = UserAuthenticator.authenticate(username, password, controllerUser);
+    }
+
+    public static void logout() {
+        userAuthenticated = null;
+    }
+
+    public static User getUserAuthenticated() {
         return userAuthenticated;
     }
 
-    public void login(String username, String password) throws UserNotFoundException, UserCredentialsException {
-        userAuthenticated = UserAuthenticator.getInstance().authenticate(username, password);
+    public static DataController<User> getControllerUser() {
+        return controllerUser;
     }
 
-    public void logout() {
-        userAuthenticated = null;
+    public static DataController<Course> getControllerCourse() {
+        return controllerCourse;
+    }
+
+    public static DataController<Subject> getControllerSubject() {
+        return controllerSubject;
+    }
+
+    public static DataController<Professor> getControllerProfessor() {
+        return controllerProfessor;
+    }
+
+    public static DataController<Curriculum> getControllerCurriculum() {
+        return controllerCurriculum;
     }
 
 }

@@ -14,10 +14,10 @@ public class ServicesPanelGeneral extends JPanel {
         this.setLayout(new BorderLayout());
 
         // Sets user data to be displayed in general panel
-        User user = AppController.getInstance().getUserAuthenticated();
+        User user = AppController.getUserAuthenticated();
         String userFullName = user.getFirstName() + ' ' + user.getLastName();
         String userRole;
-        switch (AppController.getInstance().getUserAuthenticated().getRole()) {
+        switch (user.getRole()) {
             case ADMIN:
                 this.add(new ServicesPanelAdmin(), BorderLayout.CENTER);
                 userRole = "Administrador";
@@ -58,7 +58,7 @@ public class ServicesPanelGeneral extends JPanel {
     }
 
     private void logout() {
-        AppController.getInstance().logout();
+        AppController.logout();
         AppView.getInstance().showAuth();
     }
 

@@ -3,19 +3,16 @@ package src.controller.auth;
 import src.controller.DataController;
 import src.model.User;
 
-public class UserAuthenticator {
+public final class UserAuthenticator {
 
-    private static UserAuthenticator instance = null;
-
-    public static UserAuthenticator getInstance() {
-        if (instance == null)
-            instance = new UserAuthenticator();
-        return instance;
+    private UserAuthenticator() {
+        // Prevents instantiation
     }
 
-    public User authenticate(String username, String password) throws UserNotFoundException, UserCredentialsException {
-        User foundUser = new DataController<User>(User.class).search(username);
+    public static User authenticate(String username, String password, DataController<User> controllerUser)
+            throws UserNotFoundException, UserCredentialsException {
 
+        User foundUser = controllerUser.search(username);
         if (foundUser == null) {
             throw new UserNotFoundException(username);
         } else if (!foundUser.getPassword().equals(password)) {

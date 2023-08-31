@@ -3,8 +3,7 @@ package src.controller;
 import java.util.ArrayList;
 
 import src.model.Entity;
-import src.persistence.DataProvider;
-import src.persistence.DataProviderFile;
+import src.persistence.*;
 
 public class DataController<T extends Entity> {
 

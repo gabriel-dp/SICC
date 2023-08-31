@@ -16,7 +16,7 @@ import src.model.Entity;
 public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
 
     private String title;
-    private DataController<T> dataController;
+    protected DataController<T> dataController;
 
     private GridBagLayout formGridBagLayout = new GridBagLayout();
     private JPanel formPanel = new JPanel(formGridBagLayout);
@@ -24,9 +24,9 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
     protected DefaultTableModel tableModel = new DefaultTableModel();
     protected JTable table = new JTable(tableModel);
 
-    public EntityPanelAdmin(String title, Class<T> entityClass) {
+    public EntityPanelAdmin(String title, DataController<T> dataController) {
         this.title = title;
-        dataController = new DataController<>(entityClass);
+        this.dataController = dataController;
 
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
 
@@ -56,7 +56,7 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
 
     protected abstract void defineTable();
 
-    protected abstract ArrayList<Object[]> getTableData(DataController<T> dc);
+    protected abstract ArrayList<Object[]> getTableData();
 
     public String getTitle() {
         return title;
@@ -143,7 +143,7 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
             }
         });
 
-        JButton buttons[] = { addButton, delButton };
+        final JButton buttons[] = { addButton, delButton };
         JPanel buttonsPanel = new JPanel(new GridLayout(1, buttons.length, 15, 0));
         for (JButton b : buttons) {
             buttonsPanel.add(b);
@@ -173,7 +173,7 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
         tableModel.setNumRows(0);
 
         // Adds all rows to the table
-        for (Object[] row : getTableData(dataController)) {
+        for (Object[] row : getTableData()) {
             tableModel.addRow(row);
         }
     }

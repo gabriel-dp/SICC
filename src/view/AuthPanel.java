@@ -81,7 +81,7 @@ public class AuthPanel extends JPanel {
 
     private void attemptLogin(String username, String password) {
         try {
-            AppController.getInstance().login(username, password);
+            AppController.login(username, password);
             AppView.getInstance().showServices();
         } catch (UserNotFoundException ex) {
             loginFailure("Usuário não encontrado");

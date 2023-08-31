@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import src.controller.DataController;
-import src.model.Course;
+import src.controller.AppController;
+// import src.model.Course;
 import src.model.User;
 import src.model.UserAdmin;
 import src.model.UserStudent;
@@ -24,7 +24,7 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
     private static JComboBox<Object> cbCourses = new JComboBox<>();
 
     public UserPanelAdmin() {
-        super("Usuários", User.class);
+        super("Usuários", AppController.getControllerUser());
     }
 
     protected void defineFormPanel() {
@@ -45,7 +45,7 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
 
         // Add all Courses in the ComboBox
         cbCourses.addItem("Selecione um curso");
-        for (Object c : new DataController<Course>(Course.class).getAllData()) {
+        for (Object c : AppController.getControllerCourse().getAllData()) {
             cbCourses.addItem(c);
         }
 
@@ -71,10 +71,10 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
         table.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
-    protected ArrayList<Object[]> getTableData(DataController<User> dc) {
+    protected ArrayList<Object[]> getTableData() {
         ArrayList<Object[]> data = new ArrayList<>();
 
-        for (User u : dc.getAllData()) {
+        for (User u : dataController.getAllData()) {
             String name = u.getFirstName() + ' ' + u.getLastName();
             String role;
             switch (u.getRole()) {
