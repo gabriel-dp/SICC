@@ -1,19 +1,11 @@
 package src.controller.auth;
 
-import java.util.HashMap;
-
 import src.controller.DataController;
 import src.model.User;
 
 public class UserAuthenticator {
 
-    private HashMap<String, User> usernameHash = new HashMap<>();
-
     private static UserAuthenticator instance = null;
-
-    private UserAuthenticator() {
-        fillUsernameHash();
-    }
 
     public static UserAuthenticator getInstance() {
         if (instance == null)
@@ -21,19 +13,8 @@ public class UserAuthenticator {
         return instance;
     }
 
-    private void fillUsernameHash() {
-        for (User user : new DataController<>(User.class).getAllData()) {
-            usernameHash.put(user.getUsername(), user);
-        }
-    }
-
-    public void refresh() {
-        usernameHash.clear();
-        fillUsernameHash();
-    }
-
     public User authenticate(String username, String password) throws UserNotFoundException, UserCredentialsException {
-        User foundUser = usernameHash.get(username);
+        User foundUser = new DataController<User>(User.class).search(username);
 
         if (foundUser == null) {
             throw new UserNotFoundException(username);

@@ -26,7 +26,6 @@ public class AppController {
 
     public void logout() {
         userAuthenticated = null;
-        UserAuthenticator.getInstance().refresh();
     }
 
 }
