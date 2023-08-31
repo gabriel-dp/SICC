@@ -176,10 +176,6 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
         for (Object[] row : getTableData(dataController)) {
             tableModel.addRow(row);
         }
-
-        // Turn Id column invisible
-        table.getColumnModel().getColumn(0).setMinWidth(0);
-        table.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
 }

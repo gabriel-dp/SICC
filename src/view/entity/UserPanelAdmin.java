@@ -28,7 +28,7 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
     }
 
     protected void defineFormPanel() {
-        addTextInput(tfUsername, "Usuário", 0, 0, 1);
+        addTextInput(tfUsername, "Usuário*", 0, 0, 1);
         addTextInput(tfPassword, "Senha", 1, 0, 1);
         addTextInput(tfFirstName, "Primeiro nome", 0, 1, 1);
         addTextInput(tfLastName, "Último nome", 1, 1, 1);
@@ -65,6 +65,10 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
         tableModel.addColumn("Usuário");
         tableModel.addColumn("Senha");
         tableModel.addColumn("Cargo");
+
+        // Turn Id column invisible
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
     protected ArrayList<Object[]> getTableData(DataController<User> dc) {
