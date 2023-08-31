@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import src.view.entity.*;
+import src.view.admin.*;
 
 public class ServicesPanelAdmin extends JPanel {
 

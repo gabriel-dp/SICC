@@ -1,4 +1,4 @@
-package src.view.entity;
+package src.view.admin;
 
 import java.util.ArrayList;
 

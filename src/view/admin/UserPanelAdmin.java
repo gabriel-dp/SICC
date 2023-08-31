@@ -1,4 +1,4 @@
-package src.view.entity;
+package src.view.admin;
 
 import java.awt.event.*;
 import java.util.ArrayList;
