@@ -14,8 +14,7 @@ public class DataProviderFile<T extends Entity> extends DataProvider<T> {
     private String filePath;
 
     public DataProviderFile(Class<T> entityClass) {
-        filePath = directory + File.separator + "system-java" + File.separator + "data" + File.separator
-                + entityClass.getSimpleName() + extension;
+        filePath = directory + File.separator + "data" + File.separator + entityClass.getSimpleName() + extension;
         fetchData();
     }
 
