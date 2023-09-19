@@ -80,21 +80,21 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
         formPanel.add(component);
     }
 
-    protected void addTextInput(JTextField tf, String name, int x, int y, int width) {
+    protected void addTextInput(JTextField textField, String label, int x, int y, int width) {
         JPanel subpanel = new JPanel(new FlowLayout());
-        subpanel.setBorder(BorderFactory.createTitledBorder(name));
+        subpanel.setBorder(BorderFactory.createTitledBorder(label));
 
-        int tfColumns = (15 * width) + (2 * (width - 1));
-        tf.setColumns(tfColumns);
+        int textFieldColumns = (15 * width) + (2 * (width - 1));
+        textField.setColumns(textFieldColumns);
 
-        subpanel.add(tf);
+        subpanel.add(textField);
         addFormPanelGrid(subpanel, x, y, width);
     }
 
-    protected void addRadioButtonsInput(ButtonGroup radioButtons, String name, int x, int y, int width) {
+    protected void addRadioButtonsInput(ButtonGroup radioButtons, String label, int x, int y, int width) {
         JPanel subpanel = new JPanel();
         subpanel.setLayout(new BoxLayout(subpanel, BoxLayout.Y_AXIS));
-        subpanel.setBorder(BorderFactory.createTitledBorder(name));
+        subpanel.setBorder(BorderFactory.createTitledBorder(label));
 
         Enumeration<AbstractButton> buttons = radioButtons.getElements();
         while (buttons.hasMoreElements()) {

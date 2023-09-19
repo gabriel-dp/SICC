@@ -2,6 +2,7 @@ package src.model;
 
 public class Subject extends Entity {
 
+    private String code;
     private String name;
     private int hours;
     private int vacancies;
@@ -13,6 +14,10 @@ public class Subject extends Entity {
         this.hours = hours;
         this.vacancies = vacancies;
         this.professor = professor;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public String getName() {

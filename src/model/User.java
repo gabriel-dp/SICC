@@ -2,19 +2,19 @@ package src.model;
 
 public abstract class User extends Entity {
 
-    private RoleUser role;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
+    private RoleUser role;
 
-    public User(RoleUser role, String username, String password, String firstName, String lastName) {
+    public User(String username, String password, String firstName, String lastName, RoleUser role) {
         super(username);
-        this.role = role;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
 
     public String getUsername() {
