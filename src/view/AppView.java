@@ -8,7 +8,7 @@ public class AppView extends JFrame {
 
     private AppView() {
         // Default frame settings
-        this.setTitle("System");
+        this.setTitle("SICC - Sistema Integrado de Componentes Curriculares");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setSize(800, 600);
