@@ -37,7 +37,7 @@ public class ServicesPanelGeneral extends JPanel {
     private JPanel createGeneralPanel(String userFullName, String userRole) {
         JPanel generalPanel = new JPanel(new BorderLayout());
         generalPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
-        generalPanel.setBackground(new Color(10, 200, 150));
+        generalPanel.setBackground(new Color(193, 213, 232));
 
         JLabel labelUser = new JLabel(String.format("%s (%s)", userFullName, userRole));
         generalPanel.add(labelUser, BorderLayout.CENTER);
