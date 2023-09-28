@@ -37,8 +37,7 @@ public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
         ArrayList<Object[]> data = new ArrayList<>();
 
         for (Professor p : dataController.getAllData()) {
-            String name = p.getFirstName() + ' ' + p.getLastName();
-            Object row[] = { p.getId(), name, p.getEmail() };
+            Object row[] = { p.getId(), p.getFullName(), p.getEmail() };
             data.add(row);
         }
 

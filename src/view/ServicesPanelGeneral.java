@@ -15,7 +15,6 @@ public class ServicesPanelGeneral extends JPanel {
 
         // Sets user data to be displayed in general panel
         User user = AppController.getUserAuthenticated();
-        String userFullName = user.getFirstName() + ' ' + user.getLastName();
         String userRole;
         switch (user.getRole()) {
             case ADMIN:
@@ -31,7 +30,7 @@ public class ServicesPanelGeneral extends JPanel {
                 break;
         }
 
-        this.add(createGeneralPanel(userFullName, userRole), BorderLayout.PAGE_END);
+        this.add(createGeneralPanel(user.getFullName(), userRole), BorderLayout.PAGE_END);
     }
 
     private JPanel createGeneralPanel(String userFullName, String userRole) {

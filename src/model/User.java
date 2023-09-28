@@ -37,6 +37,10 @@ public abstract class User extends Entity {
         return role;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     @Override
     public String toString() {
         return String.format("User={username=%s, password=%s, firstname=%s, lastname=%s, role=%s}",

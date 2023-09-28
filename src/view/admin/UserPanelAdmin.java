@@ -75,7 +75,6 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
         ArrayList<Object[]> data = new ArrayList<>();
 
         for (User u : dataController.getAllData()) {
-            String name = u.getFirstName() + ' ' + u.getLastName();
             String role;
             switch (u.getRole()) {
                 case ADMIN:
@@ -89,7 +88,7 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
                     break;
             }
 
-            Object[] row = { u.getId(), name, u.getUsername(), u.getPassword(), role };
+            Object[] row = { u.getId(), u.getFullName(), u.getUsername(), u.getPassword(), role };
             data.add(row);
         }
 
