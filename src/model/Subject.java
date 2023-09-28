@@ -8,8 +8,9 @@ public class Subject extends Entity {
     private int vacancies;
     private Professor professor;
 
-    public Subject(String name, int hours, int vacancies, Professor professor) {
-        super(name + professor);
+    public Subject(String code, String name, int hours, int vacancies, Professor professor) {
+        super(code);
+        this.code = code;
         this.name = name;
         this.hours = hours;
         this.vacancies = vacancies;
