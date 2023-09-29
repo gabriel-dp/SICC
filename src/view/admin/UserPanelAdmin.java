@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import src.controller.AppController;
-// import src.model.Course;
+import src.model.Course;
 import src.model.User;
 import src.model.UserAdmin;
 import src.model.UserStudent;
@@ -43,12 +43,6 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
         buttonGroup.add(rbStudent);
         addRadioButtonsInput(buttonGroup, "Cargo", 0, 2, 1);
 
-        // Add all Courses in the ComboBox
-        cbCourses.addItem("Selecione um curso");
-        for (Object c : AppController.getControllerCourse().getAllData()) {
-            cbCourses.addItem(c);
-        }
-
         // Event makes JComboBox enabled only if Student button is selected
         cbCourses.setEnabled(false);
         rbStudent.addItemListener(e -> {
@@ -56,19 +50,16 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
             if (!cbCourses.isEnabled())
                 cbCourses.setSelectedIndex(0);
         });
-        addComboBoxInput(cbCourses, "Curso (Estudante)", 1, 2, 1);
+
+        addComboBoxInput(cbCourses, "Curso (Estudante)", "Selecione o curso", 1, 2, 1);
+        setComboBoxEntityListener(cbCourses, AppController.getControllerCourse());
     }
 
     protected void defineTable() {
-        tableModel.addColumn("Id");
         tableModel.addColumn("Nome");
         tableModel.addColumn("Usuário");
         tableModel.addColumn("Senha");
         tableModel.addColumn("Cargo");
-
-        // Turn Id column invisible
-        table.getColumnModel().getColumn(0).setMinWidth(0);
-        table.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
     protected ArrayList<Object[]> getTableData() {
@@ -109,8 +100,7 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
                 || tfFirstName.getText().isBlank()
                 || tfLastName.getText().isBlank()
                 || (!rbAdmin.isSelected() && !rbStudent.isSelected())
-        // || (rbStudent.isSelected() && cbCourses.getSelectedIndex() == 0)
-        ) {
+                || (rbStudent.isSelected() && cbCourses.getSelectedIndex() == 0)) {
             throw new InvalidInputsException();
         }
 
@@ -123,9 +113,8 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
         String lastName = tfLastName.getText();
 
         if (rbStudent.isSelected()) {
-            // Course course = (Course) cbCourses.getSelectedItem();
-            // return new UserStudent(username, password, firstName, lastName, course);
-            return new UserStudent(username, password, firstName, lastName, null);
+            Course course = (Course) cbCourses.getSelectedItem();
+            return new UserStudent(username, password, firstName, lastName, course);
         }
         return new UserAdmin(username, password, firstName, lastName);
     }

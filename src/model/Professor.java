@@ -31,10 +31,7 @@ public class Professor extends Entity {
 
     @Override
     public String toString() {
-        return String.format("Professor{firstName=%s, lastName=%s, email=%s}",
-                firstName,
-                lastName,
-                email);
+        return String.format("%s (%s)", getFullName(), email);
     }
 
 }

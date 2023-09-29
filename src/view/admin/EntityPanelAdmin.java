@@ -7,6 +7,8 @@ import java.util.Enumeration;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
 import src.controller.DataController;
@@ -105,12 +107,36 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
         addFormPanelGrid(subpanel, x, y, width);
     }
 
-    protected void addComboBoxInput(JComboBox<Object> comboBox, String name, int x, int y, int width) {
+    protected void addComboBoxInput(JComboBox<Object> comboBox, String name, String first, int x, int y, int width) {
         JPanel subpanel = new JPanel(new FlowLayout());
         subpanel.setBorder(BorderFactory.createTitledBorder(name));
+        if (first != null) {
+            comboBox.addItem(first);
+        }
+
+        // Set max width
+        comboBox.setPrototypeDisplayValue("a".repeat(15 * width + 6 * (width - 1)));
 
         subpanel.add(comboBox);
         addFormPanelGrid(subpanel, x, y, width);
+    }
+
+    protected void setComboBoxEntityListener(JComboBox<Object> comboBox, DataController<?> controller) {
+        // Sets event to load data on click
+        comboBox.addPopupMenuListener(new PopupMenuListener() {
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                String first = (String) comboBox.getItemAt(0);
+                comboBox.setModel(new DefaultComboBoxModel<>(controller.getAllData().toArray()));
+                comboBox.insertItemAt(first, 0);
+                comboBox.setSelectedIndex(0);
+            }
+
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+            }
+
+            public void popupMenuCanceled(PopupMenuEvent e) {
+            }
+        });
     }
 
     private JPanel createActionButtons() {
@@ -153,7 +179,12 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
     }
 
     private JScrollPane createScrollTable() {
+        tableModel.addColumn("Id");
         defineTable();
+
+        // Turn Id column invisible
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
 
         // Table propertiers
         table.setDefaultEditor(Object.class, null); // Disable cell editing
@@ -162,7 +193,7 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
 
         // Creates scrollable panel to contain table
         JScrollPane scrollable = new JScrollPane();
-        scrollable.setPreferredSize(new Dimension(600, 200));
+        scrollable.setPreferredSize(new Dimension(600, 180));
         scrollable.setViewportView(table);
 
         return scrollable;

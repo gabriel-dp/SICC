@@ -13,6 +13,12 @@ public class Course extends Entity {
 
     public Course(String code, String name, String type, String shift, int semesters, ArrayList<Subject> subjects) {
         super(code);
+        this.code = code;
+        this.name = name;
+        this.type = type;
+        this.shift = shift;
+        this.semesters = semesters;
+        this.subjects = subjects;
     }
 
     public String getCode() {
@@ -41,21 +47,7 @@ public class Course extends Entity {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(String.format("Course{name=%s, type=%s, shift=%s, semesters=%d}",
-                name,
-                type,
-                shift,
-                semesters));
-        sb.append(", subjects=[");
-
-        for (Subject subject : subjects) {
-            sb.append(subject + "\n");
-        }
-        sb.append("]");
-
-        return sb.toString();
+        return String.format("%s", code);
     }
 
 }

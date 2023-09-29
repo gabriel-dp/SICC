@@ -5,15 +5,17 @@ public class Subject extends Entity {
     private String code;
     private String name;
     private int hours;
-    private int vacancies;
+    private int totalVacancies;
+    private int avaliableVacancies;
     private Professor professor;
 
-    public Subject(String code, String name, int hours, int vacancies, Professor professor) {
+    public Subject(String code, String name, int hours, int totalVacancies, Professor professor) {
         super(code);
         this.code = code;
         this.name = name;
         this.hours = hours;
-        this.vacancies = vacancies;
+        this.totalVacancies = totalVacancies;
+        this.avaliableVacancies = totalVacancies;
         this.professor = professor;
     }
 
@@ -29,21 +31,25 @@ public class Subject extends Entity {
         return hours;
     }
 
-    public int getVacancies() {
-        return vacancies;
+    public int getTotalVacancies() {
+        return totalVacancies;
+    }
+
+    public int getAvaliableVacancies() {
+        return avaliableVacancies;
     }
 
     public Professor getProfessor() {
         return professor;
     }
 
+    public void setAvaliableVacancies(int avaliableVacancies) {
+        this.avaliableVacancies = avaliableVacancies;
+    }
+
     @Override
     public String toString() {
-        return String.format("Subject{name=%s, hours=%d, vacancies=%s, professor=%s}",
-                name,
-                hours,
-                vacancies,
-                professor.getFirstName());
+        return String.format("%s (%s)", code, name);
     }
 
 }

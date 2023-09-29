@@ -24,13 +24,8 @@ public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
     }
 
     protected void defineTable() {
-        tableModel.addColumn("Id");
         tableModel.addColumn("Nome");
         tableModel.addColumn("Email");
-
-        // Turn Id column invisible
-        table.getColumnModel().getColumn(0).setMinWidth(0);
-        table.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
     protected ArrayList<Object[]> getTableData() {

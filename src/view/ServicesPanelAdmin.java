@@ -14,8 +14,8 @@ public class ServicesPanelAdmin extends JPanel {
     // Defines which panels will appear
     private final EntityPanelAdmin<?> services[] = {
             new UserPanelAdmin(),
-            // new CourseServices(),
-            // new SubjectServices(),
+            new CoursePanelAdmin(),
+            new SubjectPanelAdmin(),
             new ProfessorPanelAdmin()
     };
 
