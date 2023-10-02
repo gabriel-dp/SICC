@@ -93,6 +93,14 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
         addFormPanelGrid(subpanel, x, y, width);
     }
 
+    protected void addButtonInput(JButton button, String label, int x, int y, int width) {
+        JPanel subpanel = new JPanel(new FlowLayout());
+        subpanel.setBorder(BorderFactory.createTitledBorder(label));
+
+        subpanel.add(button);
+        addFormPanelGrid(subpanel, x, y, width);
+    }
+
     protected void addRadioButtonsInput(ButtonGroup radioButtons, String label, int x, int y, int width) {
         JPanel subpanel = new JPanel();
         subpanel.setLayout(new BoxLayout(subpanel, BoxLayout.Y_AXIS));
