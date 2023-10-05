@@ -1,4 +1,4 @@
-package src.view;
+package src.view.services;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,10 +7,11 @@ import javax.swing.border.EmptyBorder;
 
 import src.controller.AppController;
 import src.model.User;
+import src.view.AppView;
 
-public class ServicesPanelGeneral extends JPanel {
+public class ServicesPanel extends JPanel {
 
-    public ServicesPanelGeneral() {
+    public ServicesPanel() {
         this.setLayout(new BorderLayout());
 
         // Sets user data to be displayed in general panel

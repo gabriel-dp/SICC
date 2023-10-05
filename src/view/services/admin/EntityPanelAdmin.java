@@ -1,4 +1,4 @@
-package src.view.admin;
+package src.view.services.admin;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -11,9 +11,9 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
-import src.controller.DataController;
-import src.controller.EntityAlreadyExistsException;
+import src.controller.*;
 import src.model.Entity;
+import src.view.services.InvalidInputsException;
 
 public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
 

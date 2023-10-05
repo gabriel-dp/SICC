@@ -2,6 +2,9 @@ package src.view;
 
 import javax.swing.*;
 
+import src.view.login.AuthPanel;
+import src.view.services.ServicesPanel;
+
 public class AppView extends JFrame {
 
     private static AppView instance = null;
@@ -31,7 +34,7 @@ public class AppView extends JFrame {
     }
 
     public void showServices() {
-        this.setContentPane(new ServicesPanelGeneral());
+        this.setContentPane(new ServicesPanel());
         this.revalidate();
     }
 

@@ -1,4 +1,4 @@
-package src.view.admin;
+package src.view.services.admin;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import src.controller.AppController;
 import src.model.Professor;
+import src.view.services.InvalidInputsException;
 
 public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
 

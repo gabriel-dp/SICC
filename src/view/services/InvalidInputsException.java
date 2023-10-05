@@ -1,4 +1,4 @@
-package src.view.admin;
+package src.view.services;
 
 public class InvalidInputsException extends Exception {
 

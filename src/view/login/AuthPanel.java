@@ -1,4 +1,4 @@
-package src.view;
+package src.view.login;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,6 +7,7 @@ import javax.swing.*;
 import src.controller.AppController;
 import src.controller.auth.UserCredentialsException;
 import src.controller.auth.UserNotFoundException;
+import src.view.AppView;
 
 public class AuthPanel extends JPanel {
 

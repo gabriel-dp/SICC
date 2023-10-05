@@ -1,4 +1,4 @@
-package src.view.admin;
+package src.view.services.admin;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import src.controller.AppController;
 import src.model.Course;
 import src.model.Subject;
+import src.view.services.InvalidInputsException;
 
 public class CoursePanelAdmin extends EntityPanelAdmin<Course> {
 

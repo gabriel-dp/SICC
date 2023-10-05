@@ -1,4 +1,4 @@
-package src.view.admin;
+package src.view.services.admin;
 
 import java.util.ArrayList;
 import javax.swing.*;
@@ -6,6 +6,7 @@ import javax.swing.*;
 import src.controller.AppController;
 import src.model.Professor;
 import src.model.Subject;
+import src.view.services.InvalidInputsException;
 
 public class SubjectPanelAdmin extends EntityPanelAdmin<Subject> {
 

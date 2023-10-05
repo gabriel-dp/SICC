@@ -1,4 +1,4 @@
-package src.view.admin;
+package src.view.services.admin;
 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import src.model.Course;
 import src.model.User;
 import src.model.UserAdmin;
 import src.model.UserStudent;
+import src.view.services.InvalidInputsException;
 
 public class UserPanelAdmin extends EntityPanelAdmin<User> {
 
