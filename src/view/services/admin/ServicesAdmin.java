@@ -1,31 +1,32 @@
-package src.view.services;
+package src.view.services.admin;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.swing.*;
 
-import src.view.services.admin.*;
-
-public class ServicesPanelAdmin extends JPanel {
+public class ServicesAdmin extends JPanel {
 
     private CardLayout mainLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(mainLayout);
 
-    // Defines which panels will appear
-    private final EntityPanelAdmin<?> services[] = {
-            new UserPanelAdmin(),
-            new CoursePanelAdmin(),
-            new SubjectPanelAdmin(),
-            new ProfessorPanelAdmin()
+    private Map<JPanel, String> services = new LinkedHashMap<JPanel, String>() {
+        {
+            put(new AdminPanelUser(), "Usuários");
+            put(new AdminPanelCourse(), "Cursos");
+            put(new AdminPanelSubject(), "Disciplinas");
+            put(new AdminPanelProfessor(), "Professores");
+        }
     };
 
-    public ServicesPanelAdmin() {
+    public ServicesAdmin() {
         this.setLayout(new BorderLayout());
 
-        JPanel navPanel = new JPanel(new GridLayout(1, services.length));
-        for (EntityPanelAdmin<?> s : services) {
-            navPanel.add(createNavButton(s.getTitle()));
-            mainPanel.add(s, s.getTitle());
+        JPanel navPanel = new JPanel(new GridLayout(1, services.size()));
+        for (Map.Entry<JPanel, String> s : services.entrySet()) {
+            navPanel.add(createNavButton(s.getValue()));
+            mainPanel.add(s.getKey(), s.getValue());
         }
 
         this.add(navPanel, BorderLayout.PAGE_START);

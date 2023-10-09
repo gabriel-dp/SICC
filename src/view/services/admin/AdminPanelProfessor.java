@@ -8,13 +8,13 @@ import src.controller.AppController;
 import src.model.Professor;
 import src.view.services.InvalidInputsException;
 
-public class ProfessorPanelAdmin extends EntityPanelAdmin<Professor> {
+public class AdminPanelProfessor extends EntityPanel<Professor> {
 
     private static JTextField tfFirstName = new JTextField(),
             tfLastName = new JTextField(),
             tfEmail = new JTextField();
 
-    public ProfessorPanelAdmin() {
+    public AdminPanelProfessor() {
         super("Professores", AppController.getControllerProfessor());
     }
 

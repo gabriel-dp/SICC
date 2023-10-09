@@ -8,7 +8,7 @@ import src.model.Professor;
 import src.model.Subject;
 import src.view.services.InvalidInputsException;
 
-public class SubjectPanelAdmin extends EntityPanelAdmin<Subject> {
+public class AdminPanelSubject extends EntityPanel<Subject> {
 
     private static JTextField tfCode = new JTextField(),
             tfName = new JTextField(),
@@ -17,7 +17,7 @@ public class SubjectPanelAdmin extends EntityPanelAdmin<Subject> {
 
     private static JComboBox<Object> cbProfessors = new JComboBox<>();
 
-    public SubjectPanelAdmin() {
+    public AdminPanelSubject() {
         super("Disciplinas", AppController.getControllerSubject());
     }
 

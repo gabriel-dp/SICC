@@ -12,7 +12,7 @@ import src.model.UserAdmin;
 import src.model.UserStudent;
 import src.view.services.InvalidInputsException;
 
-public class UserPanelAdmin extends EntityPanelAdmin<User> {
+public class AdminPanelUser extends EntityPanel<User> {
 
     private static JTextField tfUsername = new JTextField(),
             tfPassword = new JTextField(),
@@ -24,7 +24,7 @@ public class UserPanelAdmin extends EntityPanelAdmin<User> {
 
     private static JComboBox<Object> cbCourses = new JComboBox<>();
 
-    public UserPanelAdmin() {
+    public AdminPanelUser() {
         super("Usuários", AppController.getControllerUser());
     }
 

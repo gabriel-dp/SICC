@@ -15,7 +15,7 @@ import src.controller.*;
 import src.model.Entity;
 import src.view.services.InvalidInputsException;
 
-public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
+public abstract class EntityPanel<T extends Entity> extends JPanel {
 
     private String title;
     protected DataController<T> dataController;
@@ -26,7 +26,7 @@ public abstract class EntityPanelAdmin<T extends Entity> extends JPanel {
     protected DefaultTableModel tableModel = new DefaultTableModel();
     protected JTable table = new JTable(tableModel);
 
-    public EntityPanelAdmin(String title, DataController<T> dataController) {
+    public EntityPanel(String title, DataController<T> dataController) {
         this.title = title;
         this.dataController = dataController;
 

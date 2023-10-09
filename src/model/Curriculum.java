@@ -30,6 +30,11 @@ public class Curriculum extends Entity {
         return subjects;
     }
 
+    public void setSubjects(ArrayList<Subject> subjects) {
+        this.subjects = subjects;
+        this.lastEdit = new Date();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

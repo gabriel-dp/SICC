@@ -13,7 +13,7 @@ import src.model.Course;
 import src.model.Subject;
 import src.view.services.InvalidInputsException;
 
-public class CoursePanelAdmin extends EntityPanelAdmin<Course> {
+public class AdminPanelCourse extends EntityPanel<Course> {
 
     private static JTextField tfCode = new JTextField(),
             tfName = new JTextField(),
@@ -26,7 +26,7 @@ public class CoursePanelAdmin extends EntityPanelAdmin<Course> {
     private static JList<Subject> subjectList = new JList<>();
     private static DefaultListModel<Subject> modelList = new DefaultListModel<>();
 
-    public CoursePanelAdmin() {
+    public AdminPanelCourse() {
         super("Cursos", AppController.getControllerCourse());
     }
 

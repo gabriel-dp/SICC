@@ -7,7 +7,10 @@ import javax.swing.border.EmptyBorder;
 
 import src.controller.AppController;
 import src.model.User;
+import src.model.UserStudent;
 import src.view.AppView;
+import src.view.services.admin.ServicesAdmin;
+import src.view.services.student.ServicesStudent;
 
 public class ServicesPanel extends JPanel {
 
@@ -19,11 +22,11 @@ public class ServicesPanel extends JPanel {
         String userRole;
         switch (user.getRole()) {
             case ADMIN:
-                this.add(new ServicesPanelAdmin(), BorderLayout.CENTER);
+                this.add(new ServicesAdmin(), BorderLayout.CENTER);
                 userRole = "Administrador";
                 break;
             case STUDENT:
-                this.add(new ServicesPanelStudent(), BorderLayout.CENTER);
+                this.add(new ServicesStudent((UserStudent) user), BorderLayout.CENTER);
                 userRole = "Estudante";
                 break;
             default:
