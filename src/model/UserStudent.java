@@ -21,10 +21,9 @@ public class UserStudent extends User {
 
     @Override
     public String toString() {
-        return String.format("UserStudent{%s, course=%s, curriculum=%s}",
-                super.toString(),
-                course.getName(),
-                curriculum);
+        return String.format("%s - %s ",
+                super.getFullName(),
+                course.getCode());
     }
 
 }

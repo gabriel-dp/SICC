@@ -17,6 +17,7 @@ public class ServicesAdmin extends JPanel {
             put(new AdminPanelCourse(), "Cursos");
             put(new AdminPanelSubject(), "Disciplinas");
             put(new AdminPanelProfessor(), "Professores");
+            put(new AdminPanelCurriculum(), "Currículos");
         }
     };
 

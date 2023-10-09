@@ -1,5 +1,6 @@
 package src.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,7 +11,7 @@ public class Curriculum extends Entity {
 
     public Curriculum(String id) {
         super(id);
-        lastEdit = new Date();
+        lastEdit = null;
         subjects = new ArrayList<>();
     }
 
@@ -28,6 +29,10 @@ public class Curriculum extends Entity {
 
     public ArrayList<Subject> getSubjects() {
         return subjects;
+    }
+
+    public String getFormattedLastEdit() {
+        return lastEdit == null ? "-" : new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss").format(lastEdit);
     }
 
     public void setSubjects(ArrayList<Subject> subjects) {

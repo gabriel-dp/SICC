@@ -2,7 +2,6 @@ package src.view.services.student;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -134,8 +133,8 @@ public class StudentPanelSubjects extends JPanel {
     }
 
     private JLabel updateLastEditLabel() {
-        String date = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss").format(student.getCurriculum().getLastEdit());
-        String message = String.format("Última solicitação registrada em: %s", date);
+        String message = String.format("Última solicitação registrada em: %s",
+                student.getCurriculum().getFormattedLastEdit());
         lastEditLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         lastEditLabel.setText(message);
 
