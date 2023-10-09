@@ -30,11 +30,11 @@ public class StudentPanelSubjects extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(Box.createVerticalStrut(15)); // Margin
         this.add(createTitleLabel("Solicitação de Disciplinas"));
-        this.add(Box.createVerticalStrut(15)); // Margin
+        this.add(Box.createVerticalStrut(20)); // Margin
         this.add(createSubjectsTable());
         this.add(Box.createVerticalStrut(15)); // Margin
         this.add(createButtonsPanel());
-        this.add(Box.createVerticalStrut(15)); // Margin
+        this.add(Box.createVerticalStrut(20)); // Margin
         this.add(lastEditLabel);
         updateLastEditLabel();
     }
@@ -136,6 +136,7 @@ public class StudentPanelSubjects extends JPanel {
     private JLabel updateLastEditLabel() {
         String date = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss").format(student.getCurriculum().getLastEdit());
         String message = String.format("Última solicitação registrada em: %s", date);
+        lastEditLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         lastEditLabel.setText(message);
 
         return lastEditLabel;
