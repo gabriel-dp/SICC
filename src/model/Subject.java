@@ -6,7 +6,6 @@ public class Subject extends Entity {
     private String name;
     private int hours;
     private int totalVacancies;
-    private int avaliableVacancies;
     private Professor professor;
 
     public Subject(String code, String name, int hours, int totalVacancies, Professor professor) {
@@ -15,7 +14,6 @@ public class Subject extends Entity {
         this.name = name;
         this.hours = hours;
         this.totalVacancies = totalVacancies;
-        this.avaliableVacancies = totalVacancies;
         this.professor = professor;
     }
 
@@ -35,16 +33,8 @@ public class Subject extends Entity {
         return totalVacancies;
     }
 
-    public int getAvaliableVacancies() {
-        return avaliableVacancies;
-    }
-
     public Professor getProfessor() {
         return professor;
-    }
-
-    public void setAvaliableVacancies(int avaliableVacancies) {
-        this.avaliableVacancies = avaliableVacancies;
     }
 
     @Override

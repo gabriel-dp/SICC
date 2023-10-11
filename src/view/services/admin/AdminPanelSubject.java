@@ -43,7 +43,7 @@ public class AdminPanelSubject extends EntityPanel<Subject> {
         ArrayList<Object[]> data = new ArrayList<>();
 
         for (Subject s : dataController.getAllData()) {
-            String vacancies = String.format("%d/%d", s.getAvaliableVacancies(), s.getTotalVacancies());
+            int vacancies = s.getTotalVacancies();
             String professor = String.format("%s (%s)", s.getProfessor().getFullName(), s.getProfessor().getEmail());
 
             Object[] row = { s.getId(), s.getName(), s.getCode(), s.getHours(), vacancies, professor };
