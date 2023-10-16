@@ -11,7 +11,6 @@ import javax.swing.border.EmptyBorder;
 import src.controller.AppController;
 import src.model.Course;
 import src.model.Subject;
-import src.view.services.InvalidInputsException;
 
 public class AdminPanelCourse extends EntityPanel<Course> {
 

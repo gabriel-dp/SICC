@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import src.controller.AppController;
 import src.model.Professor;
-import src.view.services.InvalidInputsException;
 
 public class AdminPanelProfessor extends EntityPanel<Professor> {
 

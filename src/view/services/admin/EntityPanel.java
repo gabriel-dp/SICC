@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 
 import src.controller.*;
 import src.model.Entity;
-import src.view.services.InvalidInputsException;
 
 public abstract class EntityPanel<T extends Entity> extends JPanel {
 
