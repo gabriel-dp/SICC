@@ -12,7 +12,6 @@ public class AppController {
     private static DataController<Course> controllerCourse = new DataController<>(Course.class);
     private static DataController<Subject> controllerSubject = new DataController<>(Subject.class);
     private static DataController<Professor> controllerProfessor = new DataController<>(Professor.class);
-    private static DataController<Curriculum> controllerCurriculum = new DataController<>(Curriculum.class);
 
     private AppController() {
         // Prevents instantiation
@@ -45,9 +44,4 @@ public class AppController {
     public static DataController<Professor> getControllerProfessor() {
         return controllerProfessor;
     }
-
-    public static DataController<Curriculum> getControllerCurriculum() {
-        return controllerCurriculum;
-    }
-
 }
