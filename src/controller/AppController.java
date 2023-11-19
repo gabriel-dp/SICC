@@ -2,6 +2,7 @@ package src.controller;
 
 import src.controller.auth.*;
 import src.model.*;
+import src.view.AppView;
 
 public class AppController {
 
@@ -19,10 +20,12 @@ public class AppController {
 
     public static void login(String username, String password) throws UserNotFoundException, UserCredentialsException {
         userAuthenticated = UserAuthenticator.authenticate(username, password, controllerUser);
+        AppView.getInstance().showServices();
     }
 
     public static void logout() {
         userAuthenticated = null;
+        AppView.getInstance().showAuth();
     }
 
     public static User getUserAuthenticated() {

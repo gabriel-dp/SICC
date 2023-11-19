@@ -8,7 +8,6 @@ import javax.swing.border.EmptyBorder;
 import src.controller.AppController;
 import src.model.User;
 import src.model.UserStudent;
-import src.view.AppView;
 import src.view.services.admin.ServicesAdmin;
 import src.view.services.student.ServicesStudent;
 
@@ -62,7 +61,6 @@ public class ServicesPanel extends JPanel {
 
     private void logout() {
         AppController.logout();
-        AppView.getInstance().showAuth();
     }
 
 }

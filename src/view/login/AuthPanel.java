@@ -7,7 +7,6 @@ import javax.swing.*;
 import src.controller.AppController;
 import src.controller.auth.UserCredentialsException;
 import src.controller.auth.UserNotFoundException;
-import src.view.AppView;
 
 public class AuthPanel extends JPanel {
 
@@ -83,7 +82,6 @@ public class AuthPanel extends JPanel {
     private void attemptLogin(String username, String password) {
         try {
             AppController.login(username, password);
-            AppView.getInstance().showServices();
         } catch (UserNotFoundException ex) {
             loginFailure("Usuário não encontrado");
         } catch (UserCredentialsException ex) {
