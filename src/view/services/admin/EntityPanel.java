@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import src.controller.*;
 import src.model.Entity;
+import src.utils.text.InvalidInputException;
 
 public abstract class EntityPanel<T extends Entity> extends JPanel {
 
@@ -51,7 +52,7 @@ public abstract class EntityPanel<T extends Entity> extends JPanel {
 
     protected abstract void clearForm();
 
-    protected abstract void checkForm() throws InvalidInputsException;
+    protected abstract void checkForm() throws InvalidInputException;
 
     protected abstract T createEntity();
 
@@ -155,7 +156,7 @@ public abstract class EntityPanel<T extends Entity> extends JPanel {
                     dataController.create(createEntity());
                     loadTable();
                     clearForm();
-                } catch (InvalidInputsException ex) {
+                } catch (InvalidInputException ex) {
                     final String errorMessage = "Preencha todos os campos corretamente.";
                     JOptionPane.showMessageDialog(null, errorMessage, "Falha no cadastro", JOptionPane.WARNING_MESSAGE);
                 } catch (EntityAlreadyExistsException ex) {

@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import src.controller.AppController;
 import src.model.Course;
 import src.model.Subject;
+import src.utils.text.*;
 
 public class AdminPanelCourse extends EntityPanel<Course> {
 
@@ -121,23 +122,19 @@ public class AdminPanelCourse extends EntityPanel<Course> {
         subjectList.clearSelection();
     }
 
-    protected void checkForm() throws InvalidInputsException {
-        try {
-            int semestersInt = Integer.parseInt(tfSemesters.getText());
-            if (tfCode.getText().isBlank()
-                    || tfName.getText().isBlank()
-                    || semestersInt <= 0
-                    || subjectList.getSelectedValuesList().size() == 0) {
-                throw new InvalidInputsException();
-            }
-        } catch (NumberFormatException ex) {
-            throw new InvalidInputsException();
+    protected void checkForm() throws InvalidInputException {
+        new FormatTrim(new TextFormatterJText(tfCode)).check();
+        new FormatTrim(new TextFormatterJText(tfName)).check();
+        new FormatOnlyNumbers(new TextFormatterJText(tfSemesters)).check();
+
+        if (subjectList.getSelectedValuesList().size() == 0) {
+            throw new InvalidInputException();
         }
     }
 
     protected Course createEntity() {
-        String code = tfCode.getText();
-        String name = tfName.getText();
+        String code = new FormatUppercase(new FormatTrim(new TextFormatterJText(tfCode))).getText();
+        String name = new FormatTrim(new TextFormatterJText(tfName)).getText();
         int semesters = Integer.parseInt(tfSemesters.getText());
         String type = (String) cbType.getSelectedItem();
         String shift = (String) cbShift.getSelectedItem();

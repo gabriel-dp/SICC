@@ -6,6 +6,7 @@ import javax.swing.*;
 import src.controller.AppController;
 import src.model.Professor;
 import src.model.Subject;
+import src.utils.text.*;
 
 public class AdminPanelSubject extends EntityPanel<Subject> {
 
@@ -60,27 +61,16 @@ public class AdminPanelSubject extends EntityPanel<Subject> {
         cbProfessors.setSelectedIndex(0);
     }
 
-    protected void checkForm() throws InvalidInputsException {
-        try {
-            int hoursInt = Integer.parseInt(tfHours.getText());
-            int vacanciesInt = Integer.parseInt(tfHours.getText());
-            if (tfName.getText().isBlank()
-                    || tfCode.getText().isBlank()
-                    || tfHours.getText().isBlank()
-                    || tfVacancies.getText().isBlank()
-                    || cbProfessors.getSelectedIndex() == 0
-                    || hoursInt < 0
-                    || vacanciesInt < 0) {
-                throw new InvalidInputsException();
-            }
-        } catch (NumberFormatException ex) {
-            throw new InvalidInputsException();
-        }
+    protected void checkForm() throws InvalidInputException {
+        new FormatTrim(new TextFormatterJText(tfName)).check();
+        new FormatTrim(new TextFormatterJText(tfCode)).check();
+        new FormatOnlyNumbers(new TextFormatterJText(tfHours)).check();
+        new FormatOnlyNumbers(new TextFormatterJText(tfVacancies)).check();
     }
 
     protected Subject createEntity() {
-        String name = tfName.getText();
-        String code = tfCode.getText();
+        String name = new FormatTrim(new TextFormatterJText(tfName)).getText();
+        String code = new FormatUppercase(new FormatTrim(new TextFormatterJText(tfCode))).getText();
         int hours = Integer.parseInt(tfHours.getText());
         int vacancies = Integer.parseInt(tfVacancies.getText());
         Professor professor = (Professor) cbProfessors.getSelectedItem();

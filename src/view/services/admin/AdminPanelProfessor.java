@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import src.controller.AppController;
 import src.model.Professor;
+import src.utils.text.*;
 
 public class AdminPanelProfessor extends EntityPanel<Professor> {
 
@@ -45,18 +46,16 @@ public class AdminPanelProfessor extends EntityPanel<Professor> {
         tfEmail.setText("");
     }
 
-    protected void checkForm() throws InvalidInputsException {
-        if (tfFirstName.getText().isBlank()
-                || tfLastName.getText().isBlank()
-                || tfEmail.getText().isBlank()) {
-            throw new InvalidInputsException();
-        }
+    protected void checkForm() throws InvalidInputException {
+        new FormatTrim(new TextFormatterJText(tfFirstName)).check();
+        new FormatTrim(new TextFormatterJText(tfLastName)).check();
+        new FormatEmail(new FormatTrim(new TextFormatterJText(tfEmail))).check();
     }
 
     protected Professor createEntity() {
-        String firstName = tfFirstName.getText();
-        String lastName = tfLastName.getText();
-        String email = tfEmail.getText();
+        String firstName = new FormatTrim(new TextFormatterJText(tfFirstName)).getText();
+        String lastName = new FormatTrim(new TextFormatterJText(tfLastName)).getText();
+        String email = new FormatEmail(new FormatTrim(new TextFormatterJText(tfEmail))).getText();
 
         return new Professor(firstName, lastName, email);
     }

@@ -10,6 +10,7 @@ import src.model.Course;
 import src.model.User;
 import src.model.UserAdmin;
 import src.model.UserStudent;
+import src.utils.text.*;
 
 public class AdminPanelUser extends EntityPanel<User> {
 
@@ -94,23 +95,22 @@ public class AdminPanelUser extends EntityPanel<User> {
         rbAdmin.setSelected(true);
     }
 
-    protected void checkForm() throws InvalidInputsException {
-        if (tfUsername.getText().isBlank()
-                || tfPassword.getText().isBlank()
-                || tfFirstName.getText().isBlank()
-                || tfLastName.getText().isBlank()
-                || (!rbAdmin.isSelected() && !rbStudent.isSelected())
-                || (rbStudent.isSelected() && cbCourses.getSelectedIndex() == 0)) {
-            throw new InvalidInputsException();
-        }
+    protected void checkForm() throws InvalidInputException {
+        new FormatTrim(new TextFormatterJText(tfUsername)).check();
+        new FormatPassword(new TextFormatterJText(tfPassword)).check();
+        new FormatTrim(new TextFormatterJText(tfFirstName)).check();
+        new FormatTrim(new TextFormatterJText(tfLastName)).check();
 
+        if (rbStudent.isSelected() && cbCourses.getSelectedIndex() == 0) {
+            throw new InvalidInputException();
+        }
     }
 
     protected User createEntity() {
-        String username = tfUsername.getText();
-        String password = tfPassword.getText();
-        String firstName = tfFirstName.getText();
-        String lastName = tfLastName.getText();
+        String username = new FormatTrim(new TextFormatterJText(tfUsername)).getText();
+        String password = new FormatTrim(new TextFormatterJText(tfPassword)).getText();
+        String firstName = new FormatTrim(new TextFormatterJText(tfFirstName)).getText();
+        String lastName = new FormatTrim(new TextFormatterJText(tfLastName)).getText();
 
         if (rbStudent.isSelected()) {
             Course course = (Course) cbCourses.getSelectedItem();
