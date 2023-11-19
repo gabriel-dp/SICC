@@ -1,6 +1,6 @@
 package src.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import src.model.Entity;
 import src.persistence.*;
@@ -13,11 +13,14 @@ public class DataController<T extends Entity> {
     public DataController(Class<T> entityClass) {
         this.entityClass = entityClass;
         provider = new DataProviderFile<T>(entityClass);
-        provider.fetchData();
+    }
+
+    public List<T> getAllData() {
+        return provider.getAllData();
     }
 
     public T search(String id) {
-        return provider.getData().get(id);
+        return provider.search(id);
     }
 
     public void create(T entity) throws EntityAlreadyExistsException {
@@ -31,10 +34,6 @@ public class DataController<T extends Entity> {
         if (search(id) != null) {
             provider.delete(id);
         }
-    }
-
-    public ArrayList<T> getAllData() {
-        return new ArrayList<T>(provider.getData().values());
     }
 
 }

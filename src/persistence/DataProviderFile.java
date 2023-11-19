@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import src.model.Entity;
 
-@SuppressWarnings("unchecked")
 public class DataProviderFile<T extends Entity> extends DataProvider<T> {
 
     private final String directory = System.getProperty("user.dir");
@@ -27,6 +26,8 @@ public class DataProviderFile<T extends Entity> extends DataProvider<T> {
             }
 
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
+
+            @SuppressWarnings("unchecked") // Disable ArrayList<T> cast warning
             ArrayList<T> dataArray = (ArrayList<T>) inputStream.readObject();
             for (T element : dataArray) {
                 data.put(element.getId(), element);
