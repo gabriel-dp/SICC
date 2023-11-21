@@ -2,7 +2,7 @@ package src.controller;
 
 import src.controller.auth.*;
 import src.model.*;
-import src.view.AppView;
+import src.view.View;
 
 public class AppController {
 
@@ -14,18 +14,40 @@ public class AppController {
     private static DataController<Subject> controllerSubject = new DataController<>(Subject.class);
     private static DataController<Professor> controllerProfessor = new DataController<>(Professor.class);
 
-    private AppController() {
-        // Prevents instantiation
+    private static View view = null;
+
+    private AppController(View view) {
+        // Prevents instanciating
     }
 
     public static void login(String username, String password) throws UserNotFoundException, UserCredentialsException {
         userAuthenticated = UserAuthenticator.authenticate(username, password, controllerUser);
-        AppView.getInstance().showServices();
+        if (view != null)
+            view.showServices();
     }
 
     public static void logout() {
         userAuthenticated = null;
-        AppView.getInstance().showAuth();
+        if (view != null)
+            view.showAuth();
+    }
+
+    public static void displayGUI(View newView) {
+        view = newView;
+
+        view.display();
+        if (userAuthenticated == null)
+            view.showAuth();
+        else
+            view.showServices();
+    }
+
+    public static void createDefaultUser() {
+        try {
+            controllerUser.create(new UserAdmin("admin", "12345", "Teste", "Admin"));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public static User getUserAuthenticated() {

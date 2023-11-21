@@ -5,7 +5,7 @@ import javax.swing.*;
 import src.view.login.AuthPanel;
 import src.view.services.ServicesPanel;
 
-public class AppView extends JFrame {
+public class AppView extends JFrame implements View {
 
     private static AppView instance = null;
 
@@ -26,6 +26,10 @@ public class AppView extends JFrame {
         if (instance == null)
             instance = new AppView();
         return instance;
+    }
+
+    public void display() {
+        this.setVisible(true);
     }
 
     public void showAuth() {
