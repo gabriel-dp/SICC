@@ -1,6 +1,7 @@
 package src.utils.text;
 
 public class FormatEmail extends Format {
+
     public FormatEmail(TextFormatter formatter) {
         super.formatter = formatter;
     }
@@ -14,4 +15,5 @@ public class FormatEmail extends Format {
             throw new InvalidInputException("Invalid Email");
         formatter.check();
     }
+
 }

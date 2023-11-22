@@ -1,6 +1,7 @@
 package src.utils.text;
 
 public class FormatPassword extends Format {
+
     public FormatPassword(TextFormatter formatter) {
         super.formatter = formatter;
     }
@@ -14,4 +15,5 @@ public class FormatPassword extends Format {
             throw new InvalidInputException("Invalid Password");
         formatter.check();
     }
+
 }

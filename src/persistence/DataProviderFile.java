@@ -17,7 +17,7 @@ public class DataProviderFile<T extends Entity> extends DataProvider<T> {
         fetchData();
     }
 
-    public void fetchData() {
+    private void fetchData() {
         data.clear();
         try {
             File file = new File(filePath);
@@ -41,7 +41,7 @@ public class DataProviderFile<T extends Entity> extends DataProvider<T> {
         }
     }
 
-    public void saveData() {
+    private void saveData() {
         try {
             Path directoryPath = Paths.get(filePath).getParent();
             if (directoryPath != null && !Files.exists(directoryPath)) {
