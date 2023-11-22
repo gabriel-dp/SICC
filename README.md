@@ -27,7 +27,7 @@ O  Software  tem  como  funcionalidade  possibilitar  que  estudantes  da  unive
  ├──📁 controller
  ├──📁 persistence
  ├──📁 utils
- └──☕ Program.java
+ └──📄 Program.java
 ```
 
 &nbsp;
