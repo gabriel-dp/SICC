@@ -4,12 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Curriculum {
+public class Curriculum extends Entity {
 
     private Date lastEdit;
     private ArrayList<Subject> subjects;
 
-    public Curriculum() {
+    public Curriculum(String username) {
+        super(username);
         lastEdit = null;
         subjects = new ArrayList<>();
     }
